@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Seeker</string>
+    <string name="title_activity_list_page">My Lists</string>
     <string name="title_activity_map_page">Map</string>
 </resources>
