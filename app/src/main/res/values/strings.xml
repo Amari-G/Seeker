@@ -2,7 +2,7 @@
     <string name="app_name">Seeker</string>
 
     //PAGE NAMES
-    <string name="title_activity_list_page">My Lists</string>
+    <string name="title_activity_list_page">Quests</string>
     <string name="title_activity_map_page">Map</string>
 
     //BUTTON NAMES
