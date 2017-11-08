@@ -4,6 +4,7 @@
     //PAGE NAMES
     <string name="title_activity_list_page">My Lists</string>
     <string name="title_activity_map_page">Map</string>
+    <string name="title_activity_maps2">Map2</string>
 
     //BUTTON NAMES
     <string name="button_name_back">Back</string>
