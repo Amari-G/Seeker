@@ -28,7 +28,7 @@ public class SignInActivity extends AppCompatActivity {
 
         Button bSISignIn = findViewById(R.id.bSISignIn);
 
-        //links sign up button to sign up page
+        //links sign up button to map page
         bSISignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(SignInActivity.this, MapPage.class));

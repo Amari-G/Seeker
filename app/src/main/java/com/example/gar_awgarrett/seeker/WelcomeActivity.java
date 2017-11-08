@@ -21,7 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //links sign in button to the sign in page
         bWSignIn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(WelcomeActivity.this, SignInActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, MapPage.class));
             }
         });
 
