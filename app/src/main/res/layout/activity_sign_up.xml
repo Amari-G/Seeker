@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gar_awgarrett.seeker.SignUpActivity"
+    android:background="@color/gray">
+
+    <EditText
+        android:id="@+id/etSUEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/etSUUsername"
+        android:layout_below="@+id/etSUUsername"
+        android:ems="10"
+        android:hint="@string/edit_text_email"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="84dp"
+        tools:layout_editor_absoluteY="126dp" />
+
+    <EditText
+        android:id="@+id/etSUPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/etSUUsername"
+        android:layout_marginTop="106dp"
+        android:ems="10"
+        android:hint="@string/edit_text_password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="257dp" />
+
+    <EditText
+        android:id="@+id/etSUUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSUPassword"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/edit_text_username"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="192dp" />
+
+    <Button
+        android:id="@+id/bSUSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etSUEmail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/button_name_sign_up"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="341dp" />
+
+    <Button
+        android:id="@+id/bSUBack"
+        android:layout_width="83dp"
+        android:layout_height="47dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/etSUPassword"
+        android:text="@string/go_back"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="7dp" />
+
+</RelativeLayout>
