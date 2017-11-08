@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -18,10 +19,12 @@ public class SignUpActivity extends AppCompatActivity {
         Button bSUBack = findViewById(R.id.bSUBack);
 
         //links sign up button to sign up page
-        bSUBack.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        bSUBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 startActivity(new Intent(SignUpActivity.this, WelcomeActivity.class));
             }
         });
+
     }
 }
+

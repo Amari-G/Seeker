@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -24,5 +25,18 @@ public class SignInActivity extends AppCompatActivity {
                 startActivity(new Intent(SignInActivity.this, WelcomeActivity.class));
             }
         });
+
+        Button bSISignIn = findViewById(R.id.bSISignIn);
+
+        //links sign up button to sign up page
+        bSISignIn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(SignInActivity.this, MapPage.class));
+            }
+        });
+
+       // EditText username = findViewById(R.id.etSIPassword);
+       // EditText password = findViewById(R.id.etSIUsername);
+
     }
 }
