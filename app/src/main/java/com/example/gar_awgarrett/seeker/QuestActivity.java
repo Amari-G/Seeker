@@ -27,5 +27,15 @@ public class QuestActivity extends AppCompatActivity {
                 startActivity(new Intent(QuestActivity.this, QuestActivity.class));
             }
         });
+
+        //creates list page button in navigation bar
+        ImageButton bNBMap = findViewById(R.id.bNBMap);
+
+        //links sign up button to sign up page
+        bNBMap.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(QuestActivity.this, MapPage.class));
+            }
+        });
     }
 }
