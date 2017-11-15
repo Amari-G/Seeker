@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class WelcomeActivity extends AppCompatActivity {
 
@@ -34,5 +35,9 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(new Intent(WelcomeActivity.this, SignUpActivity.class));
             }
         });
+
+        ImageView seeker_logo = (ImageView) findViewById(R.id.seeker_logo);
+        seeker_logo.setY(0);
+        seeker_logo.setX(21);
     }
 }
