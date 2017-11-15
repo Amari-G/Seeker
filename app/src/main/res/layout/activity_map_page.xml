@@ -1,48 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<fragment
+    android:id="@+id/map"
+    class="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.example.gar_awgarrett.seeker.MapPage" />
-
-    <ImageButton
-android:id="@+id/bNBMap"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_alignTop="@+id/CameraButton"
-android:layout_centerHorizontal="true"
-android:background="@android:color/transparent"
-android:tint="@android:color/holo_green_light"
-app:srcCompat="@android:drawable/ic_dialog_map" />
-
-    <ImageButton
-android:id="@+id/CameraButton"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_alignParentBottom="true"
-android:layout_alignParentStart="true"
-android:layout_marginBottom="13dp"
-android:layout_marginStart="18dp"
-android:background="@android:color/transparent"
-android:tint="@android:color/holo_green_light"
-app:srcCompat="@android:drawable/ic_menu_camera" />
+    android:layout_height="match_parent" />
 
 <ImageButton
-android:id="@+id/bNBList"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_alignParentEnd="true"
-android:layout_alignTop="@+id/bNBMap"
-android:layout_marginEnd="21dp"
-android:background="@android:color/transparent"
-android:tint="@android:color/holo_green_light"
-app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+    android:id="@+id/bNBMap"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#359c5e"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:padding="8dp"
+    android:layout_margin="5dp"
+    android:tint="@android:color/holo_green_light" />
 
 </RelativeLayout>
