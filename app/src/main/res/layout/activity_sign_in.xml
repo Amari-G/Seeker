@@ -41,7 +41,8 @@
         android:layout_marginTop="46dp"
         android:text="@string/button_name_sign_in"
         tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="278dp" />
+        tools:layout_editor_absoluteY="278dp"
+        android:background="@drawable/main_button"/>
 
     <Button
         android:id="@+id/bSIBack"
@@ -49,5 +50,6 @@
         android:layout_height="47dp"
         android:text="@string/go_back"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="7dp" />
+        tools:layout_editor_absoluteY="7dp"
+        android:background="@drawable/main_button" />
 </RelativeLayout>

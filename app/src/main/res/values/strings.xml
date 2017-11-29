@@ -14,8 +14,11 @@
     <string name="edit_text_password">Password</string>
     <string name="go_back">Back</string>
     <string name="edit_text_email">Email</string>
+    <string name="image_seeker">Seeker</string>
+
     <string name="saved_quests">Saved Quests</string>
-    <string name="find_quest">Find a Quest</string>
-    <string name="create_quest">Create a Quest</string>
+    <string name="find_quest">Find Quests</string>
+    <string name="create_quest">Create Quest</string>
+
 
 </resources>
