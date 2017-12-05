@@ -94,7 +94,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             bd = new BigDecimal(values);
             rounded = bd.setScale(2, RoundingMode.HALF_UP);
             values = rounded.doubleValue();
-            distance = "Distance: " + String.valueOf(values) + " km";
+            values = 0.621371 * values;
+            distance = "Distance: " + String.valueOf(values) + " mi";
         }
         mMap.addMarker(new MarkerOptions().position(spaceNeedle).title("Space Needle").snippet(distance) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
     }
