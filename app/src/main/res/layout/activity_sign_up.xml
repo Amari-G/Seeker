@@ -7,62 +7,71 @@
     tools:context="com.example.gar_awgarrett.seeker.SignUpActivity"
     android:background="@color/gray">
 
-    <EditText
-        android:id="@+id/etSUEmail"
+    <ImageView
+        android:id="@+id/seeker_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/etSUUsername"
-        android:layout_below="@+id/etSUUsername"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:contentDescription="@string/seeker_text"
+        android:src="@drawable/seekertextpng" />
+
+    <EditText
+        android:id="@+id/etSUEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/seeker_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
         android:ems="10"
         android:hint="@string/edit_text_email"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="126dp" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/etSUPassword"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/etSUUsername"
-        android:layout_marginTop="106dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/etSUUsername"
         android:ems="10"
         android:hint="@string/edit_text_password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="257dp" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/etSUUsername"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etSUPassword"
-        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/bSUSignUp"
+        android:layout_alignParentStart="true"
         android:ems="10"
         android:hint="@string/edit_text_username"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="192dp" />
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/bSUSignUp"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etSUEmail"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="63dp"
+        android:background="@color/colorButton"
         android:text="@string/button_name_sign_up"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="341dp" />
+        android:textColor="@android:color/white"
+        android:textSize="17sp"
+         />
 
     <Button
         android:id="@+id/bSUBack"
-        android:layout_width="83dp"
-        android:layout_height="47dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/etSUPassword"
+        android:background="@color/colorButton"
         android:text="@string/go_back"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="7dp" />
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
 
 </RelativeLayout>
