@@ -11,8 +11,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
@@ -62,9 +66,36 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
-        LatLng sydney = new LatLng(latitude, longitude);
+        LatLng currentLocation = new LatLng(latitude, longitude);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Current Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 11.5f));
+
+        LatLng spaceNeedle = new LatLng(47.6205, -122.3493);
+        double endLat = 47.6205;
+        double endLong = -122.3493;
+        //float distance1 = Location.distanceBetween(currentLocation.latitude, currentLocation.longitude, spaceNeedle.latitude, spaceNeedle.longitude);
+        //Location markerLocation = new Location("");
+        //markerLocation.setLatitude(latitude);
+        //markerLocation.setLongitude(longitude);
+        //float distance =
+
+        float[] results = new float[3];
+        Location.distanceBetween(latitude, longitude, endLat, endLong, results);
+        BigDecimal bd = new BigDecimal(results[0]);
+        BigDecimal rounded = bd.setScale(2, RoundingMode.HALF_UP);
+        double values = rounded.doubleValue();
+
+        String distance = "";
+
+        if (values > 1000) {
+            values = (Double) (values * 0.001f);
+            bd = new BigDecimal(values);
+            rounded = bd.setScale(2, RoundingMode.HALF_UP);
+            values = rounded.doubleValue();
+            distance = "Distance: " + String.valueOf(values) + " km";
+        }
+        mMap.addMarker(new MarkerOptions().position(spaceNeedle).title("Space Needle").snippet(distance) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
     }
 }
