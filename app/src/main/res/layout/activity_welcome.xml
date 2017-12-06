@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.gar_awgarrett.seeker.WelcomeActivity"
-    android:background="@color/gray">
+    android:background="@color/green">
 
     <ImageView
         android:id="@+id/seeker_logo"

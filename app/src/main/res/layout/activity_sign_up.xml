@@ -14,7 +14,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:contentDescription="@string/seeker_text"
         android:src="@drawable/seekertextpng" />
 
     <EditText
@@ -59,7 +58,7 @@
         android:background="@color/colorButton"
         android:text="@string/button_name_sign_up"
         android:textColor="@android:color/white"
-        android:textSize="17sp"
+        android:textSize="22sp"
          />
 
     <Button
