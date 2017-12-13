@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,18 +9,26 @@
     android:backgroundTint="@color/green"
     android:orientation="vertical">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/AppTheme"
+        app:popupTheme="@style/AppTheme"
+        android:layout_alignBottom="@+id/bQMyQuests" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scrollView2"
+        android:layout_below="@+id/my_toolbar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
         android:fontFamily="sans-serif"
         android:text="@string/title_activity_list_page"
         android:textSize="50sp"
-        android:textStyle="bold|normal"/>
+        android:textStyle="bold|normal" />
 
     <!--<ScrollView
         android:id="@+id/scrollView2"
@@ -44,12 +53,11 @@
         android:id="@+id/CameraButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/scrollView2"
         android:layout_marginBottom="20dp"
         android:background="@android:color/transparent"
         android:tint="@android:color/holo_green_light"
-        android:src="@android:drawable/ic_menu_camera" />
+        android:src="@android:drawable/ic_menu_camera"
+        android:layout_alignParentBottom="true" />
 
     <ImageButton
         android:id="@+id/bNBList"
