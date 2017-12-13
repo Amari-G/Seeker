@@ -5,35 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.gar_awgarrett.seeker.WelcomeActivity"
-    android:background="@color/gray">
+    android:background="@color/green">
 
     <ImageView
         android:id="@+id/seeker_logo"
-        android:layout_width="1000dp"
-        android:layout_height="1000dp"
+        android:layout_width="350dp"
+        android:layout_height="450dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:contentDescription="@string/image_seeker"
         android:src="@drawable/seekerlogo" />
 
     <Button
         android:id="@+id/bWSignIn"
-        android:layout_width="120dp"
-        android:layout_height="65dp"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
         android:layout_above="@+id/bWSignUp"
         android:layout_alignStart="@+id/bWSignUp"
         android:layout_marginBottom="43dp"
         android:text="@string/button_name_sign_in"
         tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="127dp" />
+        tools:layout_editor_absoluteY="127dp"
+        android:background="@drawable/main_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
 
     <Button
         android:id="@+id/bWSignUp"
-        android:layout_width="120dp"
-        android:layout_height="63dp"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:background="@drawable/main_button"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="190dp"
+        android:layout_marginBottom="250dp"
         android:text="@string/button_name_sign_up"
+        android:textSize="22sp"
+        android:textColor="@android:color/white"
         tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="224dp" />
+        tools:layout_editor_absoluteY="224dp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 </RelativeLayout>

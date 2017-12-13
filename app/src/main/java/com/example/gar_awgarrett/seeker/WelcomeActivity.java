@@ -9,6 +9,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
+
 public class WelcomeActivity extends AppCompatActivity {
 
     @Override

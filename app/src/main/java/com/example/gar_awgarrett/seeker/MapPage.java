@@ -11,8 +11,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
@@ -46,6 +50,24 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         });
     }
 
+    public static double distance(double lat1, double lat2, double lon1, double lon2, double el1, double el2) {
+        final int R = 6371; // Radius of the earth
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c * 1000; // convert to meters
+        double height = el1 - el2;
+        distance = Math.pow(distance, 2) + Math.pow(height, 2);
+        distance = Math.sqrt(distance);
+        distance = 0.001 * distance;
+        distance = 0.621371 * distance;
+        BigDecimal bd = new BigDecimal(distance).setScale(2, RoundingMode.HALF_UP);
+        double roundedDistance = bd.doubleValue();
+        return roundedDistance;
+    }
 
     /**
      * Manipulates the map once available.
@@ -62,9 +84,43 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
-        LatLng sydney = new LatLng(latitude, longitude);
+        LatLng currentLocation = new LatLng(latitude, longitude);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Current Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 11.5f));
+
+        double endLat = 47.6205;
+        double endLong = -122.3493;
+        LatLng spaceNeedle = new LatLng(endLat, endLong);
+        //float distance1 = Location.distanceBetween(currentLocation.latitude, currentLocation.longitude, spaceNeedle.latitude, spaceNeedle.longitude);
+        //Location markerLocation = new Location("");
+        //markerLocation.setLatitude(latitude);
+        //markerLocation.setLongitude(longitude);
+        //float distance =
+
+        /*float[] results = new float[3];
+        Location.distanceBetween(latitude, longitude, endLat, endLong, results);
+        BigDecimal bd = new BigDecimal(results[0]);
+        BigDecimal rounded = bd.setScale(2, RoundingMode.HALF_UP);
+        double values = rounded.doubleValue();
+        */
+
+        //String distance = "";
+
+        /*
+        if (values > 1000) {
+            values = (Double) (values * 0.001f);
+            bd = new BigDecimal(values);
+            rounded = bd.setScale(2, RoundingMode.HALF_UP);
+            values = 0.621371 * values;
+            values = rounded.doubleValue();
+            distance = "Distance: " + String.valueOf(values) + " mi";
+        }
+        */
+
+        String distanceToMarker = String.valueOf(distance(latitude, endLat, longitude, endLong, 0.0, 0.0)) + " mi";
+
+        mMap.addMarker(new MarkerOptions().position(spaceNeedle).title("Space Needle").snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
     }
 }
