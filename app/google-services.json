@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "238021591407",
+    "firebase_url": "https://seeker-35040.firebaseio.com",
+    "project_id": "seeker-35040",
+    "storage_bucket": "seeker-35040.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:238021591407:android:402ad1ddcf9da71f",
+        "android_client_info": {
+          "package_name": "com.example.gar_awgarrett.seeker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "238021591407-p7dkpebq57tqj0thk6lg50jt02o4nqtn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gar_awgarrett.seeker",
+            "certificate_hash": "b77a5e6d2092c4539a407c4d733149fb1e646ed2"
+          }
+        },
+        {
+          "client_id": "238021591407-nhsdl4clg9gc598qpr9mvb9ofbp0sq6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrWjY8SDTdNX1p4rCNc894Rd0grHPHJ_Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "238021591407-nhsdl4clg9gc598qpr9mvb9ofbp0sq6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
