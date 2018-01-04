@@ -15,6 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +32,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
 
+    DatabaseReference databaseLocations;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
         latitude = mLocation.getLatitude();
         longitude = mLocation.getLongitude();
+
+        databaseLocations = FirebaseDatabase.getInstance().getReference("Emerald Locations");
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -110,33 +116,11 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         double endLat = 47.6205;
         double endLong = -122.3493;
         LatLng spaceNeedle = new LatLng(endLat, endLong);
-        //float distance1 = Location.distanceBetween(currentLocation.latitude, currentLocation.longitude, spaceNeedle.latitude, spaceNeedle.longitude);
-        //Location markerLocation = new Location("");
-        //markerLocation.setLatitude(latitude);
-        //markerLocation.setLongitude(longitude);
-        //float distance =
 
-        /*float[] results = new float[3];
-        Location.distanceBetween(latitude, longitude, endLat, endLong, results);
-        BigDecimal bd = new BigDecimal(results[0]);
-        BigDecimal rounded = bd.setScale(2, RoundingMode.HALF_UP);
-        double values = rounded.doubleValue();
-        */
-
-        //String distance = "";
-
-        /*
-        if (values > 1000) {
-            values = (Double) (values * 0.001f);
-            bd = new BigDecimal(values);
-            rounded = bd.setScale(2, RoundingMode.HALF_UP);
-            values = 0.621371 * values;
-            values = rounded.doubleValue();
-            distance = "Distance: " + String.valueOf(values) + " mi";
-        }
-        */
 
         String distanceToMarker = String.valueOf(distance(latitude, endLat, longitude, endLong, 0.0, 0.0)) + " mi";
+
+
 
         mMap.addMarker(new MarkerOptions().position(spaceNeedle).title("Space Needle").snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
     }
@@ -144,9 +128,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private void writeAndReadFromDatabase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
+        DatabaseReference locationRef = database.getReference("Emerald Location");
 
         myRef.setValue("Yay this is working!!!");
-
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -155,6 +139,22 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
                 Log.d("Amy", "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Amy", "Failed to read value.", error.toException());
+            }
+        });
+
+        locationRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                Log.d("Emerald Location", "Value is: " + value);
             }
 
             @Override
