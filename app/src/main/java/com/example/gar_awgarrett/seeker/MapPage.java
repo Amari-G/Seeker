@@ -93,31 +93,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         double endLat = 47.6205;
         double endLong = -122.3493;
         LatLng spaceNeedle = new LatLng(endLat, endLong);
-        //float distance1 = Location.distanceBetween(currentLocation.latitude, currentLocation.longitude, spaceNeedle.latitude, spaceNeedle.longitude);
-        //Location markerLocation = new Location("");
-        //markerLocation.setLatitude(latitude);
-        //markerLocation.setLongitude(longitude);
-        //float distance =
 
-        /*float[] results = new float[3];
-        Location.distanceBetween(latitude, longitude, endLat, endLong, results);
-        BigDecimal bd = new BigDecimal(results[0]);
-        BigDecimal rounded = bd.setScale(2, RoundingMode.HALF_UP);
-        double values = rounded.doubleValue();
-        */
-
-        //String distance = "";
-
-        /*
-        if (values > 1000) {
-            values = (Double) (values * 0.001f);
-            bd = new BigDecimal(values);
-            rounded = bd.setScale(2, RoundingMode.HALF_UP);
-            values = 0.621371 * values;
-            values = rounded.doubleValue();
-            distance = "Distance: " + String.valueOf(values) + " mi";
-        }
-        */
 
         String distanceToMarker = String.valueOf(distance(latitude, endLat, longitude, endLong, 0.0, 0.0)) + " mi";
 

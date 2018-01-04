@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Seeker.iml" filepath="$PROJECT_DIR$/Seeker.iml" />
+      <module fileurl="file://C:\Users\gar_azli\StudioProjects\Seeker2\Seeker.iml" filepath="C:\Users\gar_azli\StudioProjects\Seeker2\Seeker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Seeker2.iml" filepath="$PROJECT_DIR$/Seeker2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
