@@ -155,6 +155,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
                 Log.d("Emerald Location", "Value is: " + value);
+                //for(DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()){
+                  //  for(DataSnapshot emeraldsSnapshot : uniqueKey.child(""))
+                //}
             }
 
             @Override

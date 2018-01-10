@@ -19,6 +19,7 @@
     <string name="create_quest">Create a Quest</string>
     <string name="seeker_test">Create Quest</string>
     <string name="image_seeker">Create Quest</string>
+    <string name="title_activity_saved_quests">SavedQuestsActivity</string>
 
 
 </resources>
