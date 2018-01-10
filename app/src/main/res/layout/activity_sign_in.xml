@@ -5,49 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
-    android:background="@color/gray">
+    android:background="@color/green">
+
+    <ImageView
+        android:id="@+id/white_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/white_background" />
+
+    <ImageView
+        android:id="@+id/seeker_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBaseline="@+id/white_background"
+        android:src="@drawable/seekertextpng" />
+
 
     <EditText
         android:id="@+id/etSIUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/etSIPassword"
-        android:layout_alignStart="@+id/etSIPassword"
-        android:layout_marginBottom="87dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:hint="@string/edit_text_username"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="126dp" />
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etSIPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/etSIUsername"
+        android:layout_alignStart="@+id/etSIUsername"
+        android:ems="10"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:ems="10"
         android:hint="@string/edit_text_password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="202dp" />
+        />
 
     <Button
         android:id="@+id/bSISignIn"
+        style="Widget.AppCompat.Button.Colored"
+        android:layout_width="180dp"
+        android:layout_height="75dp"
+        android:layout_below="@+id/white_background"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:background="@drawable/main_button"
+        android:text="@string/button_name_sign_in"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
+        />
+
+
+    <ImageButton
+        tools:ignore="ContentDescription"
+        android:id="@+id/bSIBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etSIPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="46dp"
-        android:text="@string/button_name_sign_in"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="278dp" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
 
-    <Button
-        android:id="@+id/bSIBack"
-        android:layout_width="83dp"
-        android:layout_height="47dp"
-        android:text="@string/go_back"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="7dp" />
 </RelativeLayout>
