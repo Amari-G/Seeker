@@ -11,6 +11,7 @@
     <string name="button_name_sign_in">Sign In</string>
     <string name="edit_text_username">Username</string>
     <string name="edit_text_password">Password</string>
+    <string name="go_back">Back</string>
     <string name="edit_text_email">Email</string>
     <string name="button_name_back">Back</string>
 
@@ -31,6 +32,8 @@
 
     <!--Miscellaneous strings-->
     <string name="seeker_test">Create Quest</string>
+    <string name="image_seeker">Create Quest</string>
+    <string name="title_activity_saved_quests">SavedQuestsActivity</string>
 
 
     //BUTTON DESCRIPTIONS
