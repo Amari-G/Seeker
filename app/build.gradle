@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -32,10 +33,6 @@ dependencies {
     compile "com.android.support:support-core-utils:26.1.0"
 
 }
-
-
-
-
 
 
 apply plugin: 'com.google.gms.google-services'
