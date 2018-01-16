@@ -78,9 +78,14 @@ public class QuestActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.quest_settings:
-                //go to settings page();
-                Intent intent = new Intent(this, SettingsActivity.class);
-                this.startActivity(intent);
+                //go to settings page
+                Intent settings = new Intent(this, SettingsActivity.class);
+                this.startActivity(settings);
+                break;
+            case R.id.quest_Sign_Out:
+                //go to welcome page
+                Intent signOut = new Intent(this, WelcomeActivity.class);
+                this.startActivity(signOut);
                 break;
             default:
                 return super.onOptionsItemSelected(item);
