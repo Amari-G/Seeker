@@ -16,22 +16,24 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Location {
 
+    String name;
+    Double latitude;
+    Double longitude;
+    Double distance;
+    Boolean collected;
+    //FirebaseDatabase database;
+    //double lat_result;
 
-    double latitude;
-    double longitude;
-    double distance;
-    boolean collected;
-    FirebaseDatabase database;
-    double lat_result;
-
-    public Location(double latitude, double longitude, double distance, boolean collected) {
+    public Location(String name, Double latitude, Double longitude, Double distance, Boolean collected) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.distance = distance;
         this.collected = collected;
+        this.name = name;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
+        /*
         database = FirebaseDatabase.getInstance();
         DatabaseReference locationRef = database.getReference("Emerald Location");
         locationRef.addValueEventListener(new ValueEventListener() {
@@ -53,17 +55,19 @@ public class Location {
         });
         // latitude = result;
         return lat_result;
+        */
+        return latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public double getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public boolean isCollected() {
+    public Boolean isCollected() {
         return collected;
     }
 }
