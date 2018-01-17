@@ -18,6 +18,12 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 /**
@@ -25,6 +31,11 @@ import java.util.ArrayList;
  */
 
 public class QuestActivity extends AppCompatActivity {
+    private DatabaseReference mDatabase;
+    private ListView mLocationList;
+    //private TextView mTester;
+    private ArrayList<String> mLocations = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,29 +49,78 @@ public class QuestActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.target_item, emeraldLocations);*/
         //list.setAdapter(adapter);
 
-        new Model(R.drawable.emerald, "Menu Item 1", "1");
-        new Model("Group Title");
+        /*new Model(R.drawable.emerald, "Menu Item 1", "1");
+        new Model("Group Title");*/
+
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
+        mLocationList = (ListView) findViewById(R.id.location_list);
+        //mTester = (TextView)findViewById(R.id.location);
+
+        final ArrayAdapter<String>  arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
+        mLocationList.setAdapter(arrayAdapter);
+
+        mDatabase.addChildEventListener(new ChildEventListener(){
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+                //String value = dataSnapshot.getValue(String.class);
+                String value = dataSnapshot.getKey().toString();
+                mLocations.add(value);
+                arrayAdapter.notifyDataSetChanged();
+                //mTester.setText("Location: " + value);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        //creates list page button in navigation bar
+        //creates quest page button in navigation bar
         ImageButton bNBQuest = findViewById(R.id.bNBList);
 
-        //links sign up button to sign up page
+        //links quest page button to quest page
         bNBQuest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(QuestActivity.this, QuestActivity.class));
             }
         });
 
-        //creates list page button in navigation bar
+        //creates map page button in navigation bar
         ImageButton bNBMap = findViewById(R.id.bNBMap);
 
-        //links sign up button to sign up page
+        //links map button to map page
         bNBMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(QuestActivity.this, MapPage.class));
+            }
+        });
+
+        //creates a camera button in navigation bar
+        ImageButton bNBCamera = findViewById(R.id.bNBCamera);
+
+        //links camera button to camera page
+        bNBCamera.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(QuestActivity.this, SavedQuestsActivity.class));
             }
         });
     }
@@ -93,12 +153,11 @@ public class QuestActivity extends AppCompatActivity {
         return true;
     }
 
-
-    private ArrayList<Model> generateData(){
+    /*private ArrayList<Model> generateData(){
         ArrayList<Model> models = new ArrayList<>();
         models.add(new Model("Objectives"));
         models.add(new Model(R.drawable.emerald_resized_1,"Space Needle","2"));
 
         return models;
-    }
+    }*/
 }
