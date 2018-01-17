@@ -20,12 +20,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static java.lang.Double.valueOf;
+
 public class SavedQuestsActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private ListView mLocationList;
     //private TextView mTester;
-    private ArrayList<String> mLocations = new ArrayList<>();
+    //private ArrayList<String> mLocations = new ArrayList<>();
+    private ArrayList<Location> mLocations = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +51,20 @@ public class SavedQuestsActivity extends AppCompatActivity {
         mLocationList = (ListView) findViewById(R.id.location_list);
         //mTester = (TextView)findViewById(R.id.location);
 
-        final ArrayAdapter<String>  arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
+        final ArrayAdapter<Location>  arrayAdapter = new ArrayAdapter<Location>(this, android.R.layout.simple_list_item_1, mLocations);
         mLocationList.setAdapter(arrayAdapter);
 
         mDatabase.addChildEventListener(new ChildEventListener(){
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-                //String value = dataSnapshot.getValue(String.class);
-                String value = dataSnapshot.getKey().toString();
-                mLocations.add(value);
+                String key = dataSnapshot.getKey().toString();
+                Double latitude = valueOf(dataSnapshot.child("Lat").getValue().toString());
+                Double longitude = valueOf(dataSnapshot.child("Long").getValue().toString());
+                Double distance = 0.0;
+                Boolean collected = ((Boolean)dataSnapshot.child("Collected").getValue());
+                Location newLocation = new Location(key, latitude, longitude, distance, collected);
+                mLocations.add(newLocation);
                 arrayAdapter.notifyDataSetChanged();
                 //mTester.setText("Location: " + value);
             }
@@ -83,5 +90,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
             }
         });
     }
-
+    public ArrayList<Location> getmLocations() {
+        return mLocations;
+    }
 }
