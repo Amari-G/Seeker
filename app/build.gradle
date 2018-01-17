@@ -32,3 +32,5 @@ dependencies {
     compile "com.android.support:support-core-utils:26.1.0"
 
 }
+
+apply plugin: 'com.google.gms.google-services'
