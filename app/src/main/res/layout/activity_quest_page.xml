@@ -17,20 +17,11 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30sp"
-        android:scrollbarStyle="insideInset">
-
-    </ScrollView>
-
     <ImageButton
         android:id="@+id/bNBMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/CameraButton"
+        android:layout_alignTop="@+id/bNBCamera"
         android:layout_centerHorizontal="true"
         android:background="@android:color/transparent"
         android:contentDescription="@string/button_map_page_description"
@@ -38,7 +29,7 @@
         android:tint="@android:color/holo_green_light" />
 
     <ImageButton
-        android:id="@+id/CameraButton"
+        android:id="@+id/bNBCamera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -61,7 +52,7 @@
         android:src="@android:drawable/ic_menu_sort_by_size"
         android:tint="@android:color/holo_green_light" />
 
-    <ListView
+    <!--<ListView
         android:id="@+id/locationsList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,48 +63,17 @@
         android:footerDividersEnabled="false"
         android:headerDividersEnabled="false"
         android:scrollbars="vertical">
+    </ListView>-->
 
-    </ListView>
-
-    <!--<Button
-        android:id="@+id/bQMyQuests"
-        android:layout_width="200sp"
+    <include
+        layout="@layout/content_saved_quests"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/bQFind"
-        android:layout_alignStart="@+id/bQFind"
-        android:layout_marginBottom="35dp"
-        android:background="@drawable/main_button"
-        android:padding="10dp"
-        android:text="@string/saved_quests"
-        android:textAlignment="center"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:layout_width="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:headerDividersEnabled="true" />
 
-    <Button
-        android:id="@+id/bQFind"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/main_button"
-        android:padding="10dp"
-        android:text="@string/find_quest"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/bQCreate"
-        android:layout_width="200sp"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/bQFind"
-        android:layout_below="@+id/bQFind"
-        android:layout_marginTop="35dp"
-        android:background="@drawable/main_button"
-        android:padding="10dp"
-        android:text="@string/create_quest"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="20sp"
-        android:textStyle="bold" />-->
 </RelativeLayout>
