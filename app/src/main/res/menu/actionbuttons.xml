@@ -5,13 +5,13 @@
     <item
         android:id="@+id/action_add_quest"
         android:icon="@drawable/ic_add_quest_black_24dp"
-        android:title="@string/button_name_create_location"
-        app:showAsAction="ifRoom"/>
+        android:title="@string/button_name_create_quest"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_add_location"
         android:icon="@drawable/ic_add_location_black_24dp"
-        android:title="@string/button_name_create_quest"
-        app:showAsAction="ifRoom" />
+        android:title="@string/button_name_create_location"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search_black_24dp"

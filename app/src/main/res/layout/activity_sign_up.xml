@@ -68,7 +68,7 @@
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/main_button"
+        android:background="@drawable/button_main"
         android:text="@string/go_back"
         android:textColor="@android:color/white"
         android:textSize="15sp" />

@@ -147,6 +147,16 @@ public class QuestActivity extends AppCompatActivity {
                 Intent signOut = new Intent(this, WelcomeActivity.class);
                 this.startActivity(signOut);
                 break;
+            case R.id.action_add_location:
+                //go to create location
+                Intent addLocation = new Intent(this, CreateLocation.class);
+                this.startActivity(addLocation);
+                break;
+            case R.id.action_add_quest:
+                //go to create location
+                Intent addQuest = new Intent(this, CreateQuest.class);
+                this.startActivity(addQuest);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }

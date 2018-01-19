@@ -29,7 +29,7 @@
         android:text="@string/button_name_sign_in"
         tools:layout_editor_absoluteX="126dp"
         tools:layout_editor_absoluteY="127dp"
-        android:background="@drawable/main_button"
+        android:background="@drawable/button_main"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
 
 
@@ -37,7 +37,7 @@
         android:id="@+id/bWSignUp"
         android:layout_width="150dp"
         android:layout_height="80dp"
-        android:background="@drawable/main_button"
+        android:background="@drawable/button_main"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="250dp"
