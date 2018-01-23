@@ -1,22 +1,15 @@
 package com.example.gar_awgarrett.seeker;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -54,7 +47,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
         final ArrayAdapter<Location>  arrayAdapter = new ArrayAdapter<Location>(this, android.R.layout.simple_list_item_1, mLocations);
         mLocationList.setAdapter(arrayAdapter);
 
-        mDatabase.addChildEventListener(new ChildEventListener(){
+        ChildEventListener childEventListener = mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
@@ -62,7 +55,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
                 Double latitude = valueOf(dataSnapshot.child("Lat").getValue().toString());
                 Double longitude = valueOf(dataSnapshot.child("Long").getValue().toString());
                 Double distance = 0.0;
-                Boolean collected = ((Boolean)dataSnapshot.child("Collected").getValue());
+                Boolean collected = ((Boolean) dataSnapshot.child("Collected").getValue());
                 Location newLocation = new Location(key, latitude, longitude, distance, collected);
                 mLocations.add(newLocation);
                 arrayAdapter.notifyDataSetChanged();
@@ -89,8 +82,14 @@ public class SavedQuestsActivity extends AppCompatActivity {
 
             }
         });
+
     }
-    public ArrayList<Location> getmLocations() {
+    public ArrayList getmLocations() {
+        ArrayList mLocations = null;
+        mLocations = this.mLocations;
+
         return mLocations;
+
     }
+
 }

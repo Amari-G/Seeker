@@ -25,6 +25,7 @@
         android:layout_alignBaseline="@+id/white_background"
         android:src="@drawable/seekertextpng" />
 
+
     <EditText
         android:id="@+id/etSIUsername"
         android:layout_width="wrap_content"
@@ -56,6 +57,7 @@
         android:layout_below="@+id/white_background"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp"
+        android:background="@drawable/button_main"
         android:text="@string/button_name_sign_in"
         android:textColor="@android:color/white"
         android:textSize="22sp"
