@@ -1,52 +1,42 @@
 package com.example.gar_awgarrett.seeker;
+import com.google.firebase.database.DataSnapshot;
 
 /**
- * Created by Amy on 1/3/2018.
+ * Created by gar_awgarrett on 1/23/2018.
  */
-
-
-import android.util.Log;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class LocationDB {
 
     String name;
-    String latitude;
-    String longitude;
-    String distance;
-    String collected;
+    Double latitude;
+    Double longitude;
+    Double distance;
+    Boolean collected;
 
-    public LocationDB(Location location) {
-        this.latitude = location.getLatitude().toString();
-        this.longitude = location.getLongitude().toString();
-        this.distance = location.getDistance().toString();
-        this.collected = location.isCollected().toString();
-        this.name = location.getName();
+    public LocationDB(DataSnapshot dataSnapshot, String name, Double latitude, Double longitude, Double distance, Boolean collected) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.distance = distance;
+        this.collected = collected;
+        this.name = name;
     }
 
-    public String getName() { return name; }
+    public String getName(){
+        return name;
+    }
 
-    public String getLatitude() { return latitude; }
+    public Double getLatitude() { return latitude; }
 
-    public String getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public String getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public String isCollected() { return collected; }
+    public Boolean isCollected() {
+        return collected;
+    }
 
-
-    /*public String convertLatitude(Location location) {
-        latitude = this.latitude.toString();
-        return latitude;
-    }*/
 }

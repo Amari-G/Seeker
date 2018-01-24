@@ -51,7 +51,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-                String key = dataSnapshot.getKey().toString();
+                String key = dataSnapshot.getKey();
                 Double latitude = Double.parseDouble(dataSnapshot.child("Latitude").getValue().toString());
                 Double longitude = Double.parseDouble(dataSnapshot.child("Longitude").getValue().toString());
                 Double distance = Double.parseDouble(dataSnapshot.child("Distance").getValue().toString());

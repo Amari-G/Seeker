@@ -7,6 +7,12 @@ package com.example.gar_awgarrett.seeker;
 
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,32 +40,7 @@ public class Location {
         return name;
     }
 
-    public Double getLatitude() {
-        /*
-        database = FirebaseDatabase.getInstance();
-        DatabaseReference locationRef = database.getReference("Emerald Location");
-        locationRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                double value = dataSnapshot.getValue(double.class);
-                Log.d("Emerald Location", "Value is: " + value);
-                lat_result = value;
-                // return result;
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("Amy", "Failed to read value.", error.toException());
-            }
-        });
-        // latitude = result;
-        return lat_result;
-        */
-        return latitude;
-    }
+    public Double getLatitude() { return latitude; }
 
     public Double getLongitude() {
         return longitude;
@@ -73,8 +54,4 @@ public class Location {
         return collected;
     }
 
-    /*public String convertLatitude(Location location) {
-        latitude = this.latitude.toString();
-        return latitude;
-    }*/
 }

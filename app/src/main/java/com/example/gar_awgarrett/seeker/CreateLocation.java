@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,15 +53,15 @@ public class CreateLocation extends AppCompatActivity {
                 Boolean collected = false;
 
 
-                Location newLocation = new Location(key, latitude, longitude, distance, collected);
+                Location location = new Location(key, latitude, longitude, distance, collected);
 
-                LocationDB locationDB = new LocationDB(newLocation);
+                LocationNew locationNew = new LocationNew(location);
 
-                mDatabase.child(locationDB.getName());
-                mDatabase.child(locationDB.getName()).child("Collected").setValue(locationDB.isCollected());
-                mDatabase.child(locationDB.getName()).child("Distance").setValue(locationDB.getDistance());
-                mDatabase.child(locationDB.getName()).child("Latitude").setValue(locationDB.getLatitude());
-                mDatabase.child(locationDB.getName()).child("Longitude").setValue(locationDB.getLongitude());
+                mDatabase.child(locationNew.getName());
+                mDatabase.child(locationNew.getName()).child("Collected").setValue(locationNew.isCollected());
+                mDatabase.child(locationNew.getName()).child("Distance").setValue(locationNew.getDistance());
+                mDatabase.child(locationNew.getName()).child("Latitude").setValue(locationNew.getLatitude());
+                mDatabase.child(locationNew.getName()).child("Longitude").setValue(locationNew.getLongitude());
 
                 startActivity(new Intent(CreateLocation.this, CreateLocation.class));
                 finish();

@@ -126,9 +126,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
         String distanceToMarker = String.valueOf(distance(latitude, endLat, longitude, endLong, 0.0, 0.0)) + " mi";
 
-
-
         mMap.addMarker(new MarkerOptions().position(spaceNeedle).title("Space Needle").snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
+
     }
 
     private void writeAndReadFromDatabase() {
@@ -172,6 +171,19 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 Log.w("Amy", "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public void displayLocation(GoogleMap googleMap, com.example.gar_awgarrett.seeker.Location location){
+        mMap = googleMap;
+
+
+        LatLng latLngLocation = new LatLng(location.getLatitude(), location.getLongitude());
+        String distanceToMarker = String.valueOf(MapPage.distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0)) + " mi";
+
+        googleMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
+        mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
     }
 
 }
