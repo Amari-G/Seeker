@@ -52,10 +52,10 @@ public class SavedQuestsActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
                 String key = dataSnapshot.getKey().toString();
-                Double latitude = valueOf(dataSnapshot.child("Lat").getValue().toString());
-                Double longitude = valueOf(dataSnapshot.child("Long").getValue().toString());
-                Double distance = 0.0;
-                Boolean collected = ((Boolean) dataSnapshot.child("Collected").getValue());
+                Double latitude = Double.parseDouble(dataSnapshot.child("Latitude").getValue().toString());
+                Double longitude = Double.parseDouble(dataSnapshot.child("Longitude").getValue().toString());
+                Double distance = Double.parseDouble(dataSnapshot.child("Distance").getValue().toString());
+                Boolean collected = true;
                 Location newLocation = new Location(key, latitude, longitude, distance, collected);
                 mLocations.add(newLocation);
                 arrayAdapter.notifyDataSetChanged();
