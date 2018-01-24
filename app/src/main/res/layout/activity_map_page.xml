@@ -17,14 +17,14 @@
             android:id="@+id/bNBMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/CameraButton"
+            android:layout_alignTop="@+id/bNBCamera"
             android:layout_centerHorizontal="true"
             android:background="@android:color/transparent"
             android:tint="@android:color/holo_green_light"
             android:src="@android:drawable/ic_dialog_map" />
 
         <ImageButton
-            android:id="@+id/CameraButton"
+            android:id="@+id/bNBCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"

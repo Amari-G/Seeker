@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class SignUpActivity extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_sign_up);
 
-        Button bSUBack = findViewById(R.id.bSUBack);
+        ImageButton bSUBack = findViewById(R.id.bSUBack);
 
         //links sign up button to sign up page
         bSUBack.setOnClickListener(new View.OnClickListener() {

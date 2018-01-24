@@ -5,24 +5,13 @@
     <item
         android:id="@+id/action_add_quest"
         android:icon="@drawable/ic_add_quest_black_24dp"
-        android:title="@string/button_name_add"
-        app:showAsAction="ifRoom" />
-
+        android:title="@string/button_name_create_quest"
+        app:showAsAction="always"/>
     <item
         android:id="@+id/action_add_location"
         android:icon="@drawable/ic_add_location_black_24dp"
-        android:title="@string/button_name_add"
-        app:showAsAction="ifRoom" />
-
-    <!--<item
-        android:id="@+id/action_account"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/button_name_settings_account" />
-    <item
-        android:id="@+id/action_settings_who_can"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/button_name_settings_who_can"
-        app:showAsAction="never" />-->
+        android:title="@string/button_name_create_location"
+        app:showAsAction="always" />
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search_black_24dp"
@@ -30,8 +19,13 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/quest_settings"
-        android:icon="@drawable/ic_menu_settings"
+        android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/button_name_settings"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/quest_Sign_Out"
+        android:icon="@drawable/ic_sign_out_black_24dp"
+        android:title="@string/button_name_sign_out"
         app:showAsAction="never" />
 
     <!-- Settings, should always be in the overflow -->

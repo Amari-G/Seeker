@@ -21,8 +21,6 @@ public class Location {
     Double longitude;
     Double distance;
     Boolean collected;
-    //FirebaseDatabase database;
-    //double lat_result;
 
     public Location(String name, Double latitude, Double longitude, Double distance, Boolean collected) {
         this.latitude = latitude;
@@ -30,6 +28,10 @@ public class Location {
         this.distance = distance;
         this.collected = collected;
         this.name = name;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public Double getLatitude() {
@@ -70,4 +72,9 @@ public class Location {
     public Boolean isCollected() {
         return collected;
     }
+
+    /*public String convertLatitude(Location location) {
+        latitude = this.latitude.toString();
+        return latitude;
+    }*/
 }
