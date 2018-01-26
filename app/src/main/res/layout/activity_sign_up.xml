@@ -16,28 +16,34 @@
         android:src="@drawable/white_background" />
 
     <ImageView
+        android:id="@+id/white_background2"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/white_background" />
+
+    <ImageView
         android:id="@+id/seeker_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_alignBaseline="@+id/white_background"
         android:src="@drawable/seekertextpng" />
-
 
 
     <EditText
         android:id="@+id/etSUEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/etSUUsername"
-        android:layout_alignStart="@+id/etSUUsername"
+        android:layout_above="@+id/white_background2"
+        android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/edit_text_email"
         android:inputType="textEmailAddress" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/etSUUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,14 +51,14 @@
         android:layout_centerHorizontal="true"
         android:ems="10"
         android:hint="@string/edit_text_username"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName" /> -->
 
     <EditText
         android:id="@+id/etSUPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/etSUUsername"
-        android:layout_below="@+id/etSUUsername"
+        android:layout_alignStart="@+id/etSUEmail"
+        android:layout_below="@+id/white_background2"
         android:ems="10"
         android:hint="@string/edit_text_password"
         android:inputType="textPassword" />
@@ -93,6 +99,15 @@
         android:layout_alignParentTop="true"
         android:background="@android:color/transparent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+    <TextView
+        android:id="@+id/tvSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bSUSignUp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:padding="15dp"
+        android:text="@string/existing_account" />
 
 
 </RelativeLayout>
