@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LocationNew {
 
+    //LocationNew is different from Location and LocationDB in that it has all of its information formatted as strings.
     String name;
     String latitude;
     String longitude;

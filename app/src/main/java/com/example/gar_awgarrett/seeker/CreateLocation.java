@@ -27,6 +27,7 @@ public class CreateLocation extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_create_location);
 
+
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
 
         //creates quest page button in navigation bar
@@ -58,10 +59,11 @@ public class CreateLocation extends AppCompatActivity {
                 LocationNew locationNew = new LocationNew(location);
 
                 mDatabase.child(locationNew.getName());
-                mDatabase.child(locationNew.getName()).child("Collected").setValue(locationNew.isCollected());
+                mDatabase.child(locationNew.getName()).setValue(locationNew);
+                /*mDatabase.child(locationNew.getName()).child("Collected").setValue(locationNew.isCollected());
                 mDatabase.child(locationNew.getName()).child("Distance").setValue(locationNew.getDistance());
                 mDatabase.child(locationNew.getName()).child("Latitude").setValue(locationNew.getLatitude());
-                mDatabase.child(locationNew.getName()).child("Longitude").setValue(locationNew.getLongitude());
+                mDatabase.child(locationNew.getName()).child("Longitude").setValue(locationNew.getLongitude());*/
 
                 startActivity(new Intent(CreateLocation.this, CreateLocation.class));
                 finish();

@@ -43,6 +43,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
 
         gpsTracker = new GPSTracker(getApplicationContext());
