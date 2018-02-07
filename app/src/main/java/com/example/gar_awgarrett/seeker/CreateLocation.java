@@ -50,19 +50,14 @@ public class CreateLocation extends AppCompatActivity {
                 String stringLong = editableLong.toString();
                 Double longitude = Double.parseDouble(stringLong);
 
-                //Double distance = 0.0;
-                //Boolean collected = false;
-                String id = "temporary id";
 
+                String id = "temporary id";
 
                 Location newLocation = new Location(id, name, latitude, longitude);
 
                 LocationDB locationDB = new LocationDB(newLocation);
 
-                //mDatabase.child(locationDB.getName());
                 mDatabase.child(locationDB.getId());
-                //mDatabase.child(locationDB.getName()).child("Collected").setValue(locationDB.isCollected());
-                //mDatabase.child(locationDB.getName()).child("Distance").setValue(locationDB.getDistance());
                 mDatabase.child(locationDB.getName()).child("name").setValue(locationDB.getId());
                 mDatabase.child(locationDB.getName()).child("latitude").setValue(locationDB.getLatitude());
                 mDatabase.child(locationDB.getName()).child("longitude").setValue(locationDB.getLongitude());
