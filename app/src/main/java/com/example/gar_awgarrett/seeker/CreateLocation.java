@@ -38,7 +38,7 @@ public class CreateLocation extends AppCompatActivity {
             public void onClick(View v) {
                 EditText locationInput = findViewById(R.id.newLocName);
                 Editable editable = locationInput.getText();
-                String key = editable.toString();
+                String name = editable.toString();
 
                 EditText latitudeInput = findViewById(R.id.newLocLat);
                 Editable editableLat = latitudeInput.getText();
@@ -50,19 +50,22 @@ public class CreateLocation extends AppCompatActivity {
                 String stringLong = editableLong.toString();
                 Double longitude = Double.parseDouble(stringLong);
 
-                Double distance = 0.0;
-                Boolean collected = false;
+                //Double distance = 0.0;
+                //Boolean collected = false;
+                String id = "temporary id";
 
 
-                Location newLocation = new Location(key, latitude, longitude, distance, collected);
+                Location newLocation = new Location(id, name, latitude, longitude);
 
                 LocationDB locationDB = new LocationDB(newLocation);
 
-                mDatabase.child(locationDB.getName());
-                mDatabase.child(locationDB.getName()).child("Collected").setValue(locationDB.isCollected());
-                mDatabase.child(locationDB.getName()).child("Distance").setValue(locationDB.getDistance());
-                mDatabase.child(locationDB.getName()).child("Latitude").setValue(locationDB.getLatitude());
-                mDatabase.child(locationDB.getName()).child("Longitude").setValue(locationDB.getLongitude());
+                //mDatabase.child(locationDB.getName());
+                mDatabase.child(locationDB.getId());
+                //mDatabase.child(locationDB.getName()).child("Collected").setValue(locationDB.isCollected());
+                //mDatabase.child(locationDB.getName()).child("Distance").setValue(locationDB.getDistance());
+                mDatabase.child(locationDB.getName()).child("name").setValue(locationDB.getId());
+                mDatabase.child(locationDB.getName()).child("latitude").setValue(locationDB.getLatitude());
+                mDatabase.child(locationDB.getName()).child("longitude").setValue(locationDB.getLongitude());
 
                 startActivity(new Intent(CreateLocation.this, CreateLocation.class));
                 finish();
