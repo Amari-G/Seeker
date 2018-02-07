@@ -16,6 +16,14 @@
         android:src="@drawable/white_background" />
 
     <ImageView
+        android:id="@+id/white_background2"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/white_background" />
+
+    <ImageView
         android:id="@+id/seeker_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,8 +38,8 @@
         android:id="@+id/etSIUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/white_background2"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:ems="10"
         android:hint="@string/edit_text_username"
         android:inputType="textPersonName" />
@@ -40,7 +48,7 @@
         android:id="@+id/etSIPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etSIUsername"
+        android:layout_below="@+id/white_background2"
         android:layout_alignStart="@+id/etSIUsername"
         android:ems="10"
         android:layout_centerHorizontal="true"
@@ -73,5 +81,15 @@
         android:layout_alignParentTop="true"
         android:background="@android:color/transparent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <TextView
+        android:id="@+id/tvSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bSISignIn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:padding="15dp"
+        android:text="@string/create_account" />
 
 </RelativeLayout>
