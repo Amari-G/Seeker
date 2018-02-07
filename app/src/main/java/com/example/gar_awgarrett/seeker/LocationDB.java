@@ -16,19 +16,24 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LocationDB {
 
+    String id;
     String name;
     String latitude;
     String longitude;
-    String distance;
-    String collected;
+    //String distance;
+    //String collected;
 
     public LocationDB(Location location) {
         this.latitude = location.getLatitude().toString();
         this.longitude = location.getLongitude().toString();
-        this.distance = location.getDistance().toString();
-        this.collected = location.isCollected().toString();
+        //this.distance = location.getDistance().toString();
+        //this.collected = location.isCollected().toString();
         this.name = location.getName();
+        this.id = location.getId();
     }
+
+    public String getId() { return id; }
+
 
     public String getName() { return name; }
 
@@ -38,12 +43,12 @@ public class LocationDB {
         return longitude;
     }
 
-    public String getDistance() {
+    /*public String getDistance() {
         return distance;
     }
 
     public String isCollected() { return collected; }
-
+    */
 
     /*public String convertLatitude(Location location) {
         latitude = this.latitude.toString();
