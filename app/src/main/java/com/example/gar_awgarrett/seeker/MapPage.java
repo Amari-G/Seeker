@@ -24,18 +24,24 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+//import com.google.gson.Gson;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
+    private SavedQuestsActivity savedQuests;
     private GoogleMap mMap;
     private GPSTracker gpsTracker;
     private Location mLocation;
     double latitude, longitude;
 
     DatabaseReference databaseLocations;
+    //ArrayList<Location> locationList;
+    private ArrayList<com.example.gar_awgarrett.seeker.Location> locationList = new ArrayList<>();
+    SavedQuestsActivity instanceOfSavedQuests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,23 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         longitude = mLocation.getLongitude();
 
         databaseLocations = FirebaseDatabase.getInstance().getReference("Emerald Locations");
+        //ArrayList<Location> locations = savedQuests.getmLocations();
+
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            ArrayList<Location> locationList = b.getParcelableArrayList("Location List");
+            Log.i("List", "Passed Array List :: " + locationList);
+        }
+        else {
+            Log.i("List", " Passing data did not work");
+        }
+
+        //Log.i("List", " Passing data did not work");
+
+        //locationList = instanceOfSavedQuests.getmLocations();
+
+        //String test = instanceOfSavedQuests.getmLocations();
+        //Log.i("List", test);
 
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -77,6 +100,14 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         //.setAction("Action", null).show();
         //}
         });
+
+
+        //Gson gson = new Gson();
+        String mLocationsAsAString = getIntent().getStringExtra("Locations Array");
+        Log.i("List", " Passing data worked");
+        //Intent intent = getIntent();
+        //locationList = intent.getExtras().getParcelableArrayList("location_array");
+
     }
 
     public static double distance(double lat1, double lat2, double lon1, double lon2, double el1, double el2) {
