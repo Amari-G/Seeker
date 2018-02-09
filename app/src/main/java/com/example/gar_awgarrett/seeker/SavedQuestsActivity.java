@@ -56,7 +56,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
                 Double longitude = Double.parseDouble(dataSnapshot.child("Longitude").getValue().toString());
                 Double distance = Double.parseDouble(dataSnapshot.child("Distance").getValue().toString());
                 Boolean collected = true;
-                Location newLocation = new Location(key, latitude, longitude, distance, collected);
+                Location newLocation = new Location(key, latitude, longitude);
                 mLocations.add(newLocation);
                 arrayAdapter.notifyDataSetChanged();
                 //mTester.setText("Location: " + value);

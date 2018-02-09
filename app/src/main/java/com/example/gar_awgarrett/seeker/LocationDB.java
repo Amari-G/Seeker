@@ -1,8 +1,11 @@
 package com.example.gar_awgarrett.seeker;
 import com.google.firebase.database.DataSnapshot;
 
-/**
- * Created by gar_awgarrett on 1/23/2018.
+/*
+    The intended purpose of this object is to take information from a datasnapshot,
+        and use the information to construct a Location object.
+    This may be unnecessary however, as the client could just use the id of a location
+        to collect the desired information directly from the database.
  */
 
 public class LocationDB {
