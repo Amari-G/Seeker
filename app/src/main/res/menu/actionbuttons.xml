@@ -28,8 +28,8 @@
         android:title="@string/button_name_sign_out"
         app:showAsAction="never" />
     <item
-        android:id="@+id/saved_quests_activity"
-        android:icon="@drawable/ic_menu_settings"
+        android:id="@+id/quest_saved_quests"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
         android:title="@string/title_activity_saved_quests"
         app:showAsAction="never" />
 
