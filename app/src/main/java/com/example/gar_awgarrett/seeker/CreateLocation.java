@@ -5,12 +5,13 @@ import android.os.LocaleList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,40 +29,45 @@ public class CreateLocation extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_create_location);
 
+        //refers to "Emerald Locations" child in database
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
 
         //creates quest page button in navigation bar
         Button createLocation = findViewById(R.id.button_create_location);
 
-        //links quest page button to quest page
+        //The following code executes when the create location button is pressed
         createLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //takes text input from "Location Name" field
                 EditText locationInput = findViewById(R.id.newLocName);
                 Editable editable = locationInput.getText();
                 String name = editable.toString();
 
+                //takes text input from "Latitude" field
                 EditText latitudeInput = findViewById(R.id.newLocLat);
                 Editable editableLat = latitudeInput.getText();
                 String stringLat = editableLat.toString();
                 Double latitude = Double.parseDouble(stringLat);
 
+                //takes text input from "Longitude" field
                 EditText longitudeInput = findViewById(R.id.newLocLong);
                 Editable editableLong = longitudeInput.getText();
                 String stringLong = editableLong.toString();
                 Double longitude = Double.parseDouble(stringLong);
 
+                //creates location in database by generating a new path
+                DatabaseReference newLocationPath = mDatabase.push();
 
-                String id = "temporary id";
+                //creates new string with value set as the locations unique id
+                String pathId = newLocationPath.getKey();
 
-                Location newLocation = new Location(id, name, latitude, longitude);
+                //creates location the location object with values created above
+                Location location = new Location(pathId, name, latitude, longitude);
 
-                LocationDB locationDB = new LocationDB(newLocation);
+                //adds location object to the path created on line 59
+                mDatabase.child(pathId).setValue(location);
 
-                mDatabase.child(locationDB.getId());
-                mDatabase.child(locationDB.getName()).child("name").setValue(locationDB.getId());
-                mDatabase.child(locationDB.getName()).child("latitude").setValue(locationDB.getLatitude());
-                mDatabase.child(locationDB.getName()).child("longitude").setValue(locationDB.getLongitude());
-
+                //Restarts activity with empty fields
                 startActivity(new Intent(CreateLocation.this, CreateLocation.class));
                 finish();
             }
