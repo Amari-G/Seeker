@@ -1,45 +1,42 @@
 package com.example.gar_awgarrett.seeker;
-import com.google.firebase.database.DataSnapshot;
 
-/*
-    The intended purpose of this object is to take information from a datasnapshot,
-        and use the information to construct a Location object.
-    This may be unnecessary however, as the client could just use the id of a location
-        to collect the desired information directly from the database.
+/**
+ * Created by Amy on 1/3/2018.
  */
+
+
+import android.util.Log;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LocationDB {
 
+    String id;
     String name;
-    Double latitude;
-    Double longitude;
-    Double distance;
-    Boolean collected;
+    String latitude;
+    String longitude;
 
-    public LocationDB(DataSnapshot dataSnapshot, String name, Double latitude, Double longitude, Double distance, Boolean collected) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.distance = distance;
-        this.collected = collected;
-        this.name = name;
+
+    public LocationDB(Location location) {
+        this.latitude = location.getLatitude().toString();
+        this.longitude = location.getLongitude().toString();
+        this.name = location.getName();
+        this.id = location.getId();
     }
 
-    public String getName(){
-        return name;
-    }
+    public String getId() { return id; }
 
-    public Double getLatitude() { return latitude; }
+    public String getName() { return name; }
 
-    public Double getLongitude() {
+    public String getLatitude() { return latitude; }
+
+    public String getLongitude() {
         return longitude;
-    }
-
-    public Double getDistance() {
-        return distance;
-    }
-
-    public Boolean isCollected() {
-        return collected;
     }
 
 }

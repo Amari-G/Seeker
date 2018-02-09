@@ -9,42 +9,37 @@
 
     <ImageView
         android:id="@+id/seeker_logo"
-        android:layout_width="350dp"
-        android:layout_height="450dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:contentDescription="@string/image_seeker_description"
         android:src="@drawable/seekerlogo" />
 
     <Button
         android:id="@+id/bWSignIn"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="150dp"
         android:layout_height="80dp"
-        android:textColor="@android:color/white"
-        android:textSize="22sp"
-        android:layout_above="@+id/bWSignUp"
-        android:layout_alignStart="@+id/bWSignUp"
-        android:layout_marginBottom="43dp"
-        android:text="@string/button_name_sign_in"
-        tools:layout_editor_absoluteX="126dp"
-        tools:layout_editor_absoluteY="127dp"
+        android:layout_below="@+id/seeker_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
         android:background="@drawable/button_main"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        android:text="@string/button_name_sign_in"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
 
 
     <Button
         android:id="@+id/bWSignUp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="150dp"
         android:layout_height="80dp"
+        android:layout_alignStart="@+id/bWSignIn"
+        android:layout_below="@+id/bWSignIn"
+        android:layout_marginTop="36dp"
         android:background="@drawable/button_main"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="250dp"
         android:text="@string/button_name_sign_up"
-        android:textSize="22sp"
         android:textColor="@android:color/white"
-        tools:layout_editor_absoluteX="128dp"
-        tools:layout_editor_absoluteY="224dp"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        android:textSize="22sp" />
 </RelativeLayout>

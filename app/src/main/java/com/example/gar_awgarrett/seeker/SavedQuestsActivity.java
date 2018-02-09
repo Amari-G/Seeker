@@ -50,16 +50,13 @@ public class SavedQuestsActivity extends AppCompatActivity {
         ChildEventListener childEventListener = mDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-                String key = dataSnapshot.getKey();
-                Double latitude = Double.parseDouble(dataSnapshot.child("Latitude").getValue().toString());
-                Double longitude = Double.parseDouble(dataSnapshot.child("Longitude").getValue().toString());
-                Double distance = Double.parseDouble(dataSnapshot.child("Distance").getValue().toString());
-                Boolean collected = true;
-                Location newLocation = new Location(key, latitude, longitude);
+                String id = dataSnapshot.getKey();
+                String name = dataSnapshot.child("name").getValue().toString();
+                Double latitude = Double.parseDouble(dataSnapshot.child("latitude").getValue().toString());
+                Double longitude = Double.parseDouble(dataSnapshot.child("longitude").getValue().toString());
+                Location newLocation = new Location(id, name, latitude, longitude);
                 mLocations.add(newLocation);
                 arrayAdapter.notifyDataSetChanged();
-                //mTester.setText("Location: " + value);
             }
 
             @Override

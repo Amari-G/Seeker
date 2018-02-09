@@ -18,46 +18,17 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 
-public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener{
-
-   /* private static final String TAG = "GoogleActivity";
-    private static final int RC_SIGN_IN = 9001;
-
-    private FirebaseAuth mAuth;
-
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
-    private GoogleApiClient mGoogleApiClient;
-
-    private TextView myStatusTextView;
-
-    private TextView myDetailTextView; */
-
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN
-       /* GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleApiClient = new GoogleApiClient.Builder(this);
-
-
-        */
-        //creates sign up button
         ImageButton bSIBack = findViewById(R.id.bSIBack);
 
-        //links sign up button to sign up page
-        bSIBack.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
+        bSIBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 startActivity(new Intent(SignInActivity.this, WelcomeActivity.class));
             }
         });
@@ -71,18 +42,20 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             }
         });
 
-       // EditText username = findViewById(R.id.etSIPassword);
-       // EditText password = findViewById(R.id.etSIUsername);
+        findViewById(R.id.tvSignUp).setOnClickListener(this);
 
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tvSignUp:
 
-    }
+                startActivity(new Intent(this, SignUpActivity.class));
 
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+                break;
+        }
     }
 }
+
+
