@@ -1,10 +1,7 @@
 package com.example.gar_awgarrett.seeker;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -13,7 +10,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-//import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -48,7 +44,6 @@ public class SavedQuestsActivity extends AppCompatActivity {
         mLocationList = (ListView) findViewById(R.id.location_list);
         //mTester = (TextView)findViewById(R.id.location);
 
-        //final ArrayAdapter<String>  arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
         final ArrayAdapter<Location>  arrayAdapter = new ArrayAdapter<Location>(this, android.R.layout.simple_list_item_1, mLocations);
         mLocationList.setAdapter(arrayAdapter);
 
@@ -85,31 +80,13 @@ public class SavedQuestsActivity extends AppCompatActivity {
             }
         });
 
-    //Gson gson = new Gson();
-    //String mLocationsAsAString = gson.toJson(mLocations);
-
-    /*Intent intent = new Intent(SavedQuestsActivity.this, MapPage.class);
-    intent.putExtra("Locations Array", mLocationsAsAString);
-    startActivity(intent);
-    */
-
     }
-
-    /*public String getmLocations() {
-        Gson gson = new Gson();
-        String mLocationsAsAString = gson.toJson(mLocations);
-        return mLocationsAsAString;
-    }
-    */
-
     public ArrayList getmLocations() {
-        //ArrayList mLocations = null;
-        //mLocations = this.mLocations;
+        ArrayList mLocations = null;
+        mLocations = this.mLocations;
 
         return mLocations;
-        //Log.i("Testing: ", "passing data worked!");
 
     }
-
 
 }
