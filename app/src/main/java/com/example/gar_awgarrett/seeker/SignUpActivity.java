@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ImageButton;
 
-public class SignUpActivity extends AppCompatActivity {
+
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,18 @@ public class SignUpActivity extends AppCompatActivity {
                 startActivity(new Intent(SignUpActivity.this, WelcomeActivity.class));
             }
         });
+        findViewById(R.id.tvSignIn).setOnClickListener(this);
 
+    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tvSignIn:
+
+                startActivity(new Intent(this, SignInActivity.class));
+
+                break;
+        }
     }
 }
 
