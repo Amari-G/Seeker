@@ -5,12 +5,26 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Property;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by Amy on 2/3/2018.
  */
 
 //base class to hold ArrayList of Location info
-public class LocationRetrieval implements Parcelable {
+public class LocationRetrieval {
+
+    public FirebaseDatabase database;
+
+    public static final LocationRetrieval locationRetrievalInstance = new LocationRetrieval();
+
+    static LocationRetrieval getInstance() {
+        return locationRetrievalInstance;
+    }
+
+    private LocationRetrieval() {
+        database = FirebaseDatabase.getInstance();
+    }
 
     String name;
     Double latitude;
@@ -35,10 +49,7 @@ public class LocationRetrieval implements Parcelable {
     public Double getLatitude() {
         return latitude;
     }
-    public Double getLongitude() {
-
-        return longitude;
-    }
+    public Double getLongitude() { return longitude; }
     public Boolean isCollected() {
         return collected;
     }
