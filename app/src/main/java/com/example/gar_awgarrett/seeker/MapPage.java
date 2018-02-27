@@ -34,7 +34,6 @@ import java.util.ArrayList;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
-    private SavedQuestsActivity savedQuests;
     private GoogleMap mMap;
     private GPSTracker gpsTracker;
     private Location mLocation;
@@ -69,7 +68,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MapPage.this, QuestActivity.class));
-                writeAndReadFromDatabase();
+                //writeAndReadFromDatabase();
             }
         });
     }
