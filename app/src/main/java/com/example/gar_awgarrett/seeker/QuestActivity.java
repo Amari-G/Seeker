@@ -1,11 +1,7 @@
 package com.example.gar_awgarrett.seeker;
 
-import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,7 +12,6 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -40,6 +35,7 @@ public class QuestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         setContentView(R.layout.activity_quest_page);
 
         //ListView list = findViewById(R.id.locationsList);
@@ -97,12 +93,13 @@ public class QuestActivity extends AppCompatActivity {
         //creates quest page button in navigation bar
         ImageButton bNBQuest = findViewById(R.id.bNBList);
 
+        /*
         //links quest page button to quest page
         bNBQuest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(QuestActivity.this, QuestActivity.class));
             }
-        });
+        });*/
 
         //creates map page button in navigation bar
         ImageButton bNBMap = findViewById(R.id.bNBMap);
@@ -110,6 +107,7 @@ public class QuestActivity extends AppCompatActivity {
         //links map button to map page
         bNBMap.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                finish();
                 startActivity(new Intent(QuestActivity.this, MapPage.class));
             }
         });
@@ -120,11 +118,37 @@ public class QuestActivity extends AppCompatActivity {
         //links camera button to camera page
         bNBCamera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                finish();
                 startActivity(new Intent(QuestActivity.this, SavedQuestsActivity.class));
             }
         });
     }
+    /*
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        onStartNewActivity();
+    }
 
+    @Override
+    public void startActivity(Intent intent, Bundle options) {
+        super.startActivity(intent, options);
+        onStartNewActivity();
+    }
+
+    protected void onStartNewActivity() {
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_left);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        onLeaveThisActivity();
+    }
+
+    protected void onLeaveThisActivity() {
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,17 +181,14 @@ public class QuestActivity extends AppCompatActivity {
                 Intent addQuest = new Intent(this, CreateQuest.class);
                 this.startActivity(addQuest);
                 break;
+            case R.id.quest_saved_quests:
+                //go to create location
+                Intent SavedQuests = new Intent(this, SavedQuestsActivity.class);
+                this.startActivity(SavedQuests);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
         return true;
     }
-
-    /*private ArrayList<Model> generateData(){
-        ArrayList<Model> models = new ArrayList<>();
-        models.add(new Model("Objectives"));
-        models.add(new Model(R.drawable.emerald_resized_1,"Space Needle","2"));
-
-        return models;
-    }*/
 }
