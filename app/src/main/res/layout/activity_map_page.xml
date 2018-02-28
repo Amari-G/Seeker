@@ -2,37 +2,52 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:layout="@layout/activity_map_page">
 
         <fragment
+            tools:ignore="ContentDescription"
             android:id="@+id/map"
-            class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            class="com.google.android.gms.maps.SupportMapFragment" />
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="false"
+            android:layout_alignTop="@+id/bNBCamera"
+            android:background="@color/emerald_tracker_background"
+            android:backgroundTint="@color/emerald_tracker_background" />
 
         <ImageButton
             android:id="@+id/bNBMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/bNBCamera"
+            android:layout_alignTop="@+id/textView2"
             android:layout_centerHorizontal="true"
             android:background="@android:color/transparent"
-            android:tint="@android:color/holo_green_light"
-            android:src="@android:drawable/ic_dialog_map" />
+            android:src="@android:drawable/ic_dialog_map"
+            android:tint="@android:color/black" />
 
         <ImageButton
             android:id="@+id/bNBCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
-            android:layout_marginBottom="13dp"
             android:background="@android:color/transparent"
-            android:tint="@android:color/holo_green_light"
-            android:src="@android:drawable/ic_menu_camera" />
+            android:src="@android:drawable/ic_menu_camera"
+            android:tint="@android:color/black" />
 
         <ImageButton
             android:id="@+id/bNBList"
@@ -42,8 +57,25 @@
             android:layout_alignTop="@+id/bNBMap"
             android:layout_marginEnd="20dp"
             android:background="@android:color/transparent"
-            android:tint="@android:color/holo_green_light"
-            android:src="@android:drawable/ic_menu_sort_by_size" />
+            android:src="@android:drawable/ic_menu_sort_by_size"
+            android:tint="@android:color/black" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/bNBCamera"
+        android:layout_marginTop="31dp"
+        android:background="@color/emerald_tracker_background"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+        android:drawableLeft="@drawable/emerald_resized_2"
+        android:paddingBottom="5dp"
+        android:paddingLeft="7dp"
+        android:paddingRight="7dp"
+        android:paddingTop="5dp"
+        android:text=" collected: 2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 </RelativeLayout>

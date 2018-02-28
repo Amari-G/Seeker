@@ -6,4 +6,5 @@
     <color name="green">#81C784</color>
     <color name="colorButton">#69F0AE</color>
     <color name="colorNavButton">#FFFFFF</color>
+    <color name="emerald_tracker_background">#e6bbbbbb</color>
 </resources>
