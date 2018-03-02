@@ -108,6 +108,13 @@
         android:layout_marginTop="17dp"
         android:padding="15dp"
         android:text="@string/existing_account" />
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
 
 
 </RelativeLayout>
