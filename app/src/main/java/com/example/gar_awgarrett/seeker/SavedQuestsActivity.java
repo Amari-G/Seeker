@@ -2,6 +2,7 @@ package com.example.gar_awgarrett.seeker;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -57,6 +58,8 @@ public class SavedQuestsActivity extends AppCompatActivity {
                 //Location newLocation = new Location(id, name, latitude, longitude);
                 mLocations.add(name);
                 arrayAdapter.notifyDataSetChanged();
+                int size = mLocations.size();
+                Log.i("Amy", "Value is: " + String.valueOf(size));
             }
 
             @Override
@@ -81,12 +84,15 @@ public class SavedQuestsActivity extends AppCompatActivity {
         });
 
     }
-    public ArrayList getmLocations() {
-        ArrayList mLocations = null;
-        mLocations = this.mLocations;
-
+    public ArrayList<Location> getmLocations() {
+        //ArrayList mLocations = null;
+        //mLocations = this.mLocations;
         return mLocations;
-
     }
+
+    /*public Location getALocation(int x) {
+        return mLocations[x];
+    }
+    */
 
 }
