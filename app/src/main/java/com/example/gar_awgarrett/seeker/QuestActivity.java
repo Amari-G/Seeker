@@ -177,8 +177,8 @@ public class QuestActivity extends AppCompatActivity {
                 this.startActivity(addLocation);
                 break;
             case R.id.action_add_quest:
-                //go to create location
-                Intent addQuest = new Intent(this, CreateQuest.class);
+                //go to create quest
+                Intent addQuest = new Intent(this, CreateLocation.class);
                 this.startActivity(addQuest);
                 break;
             case R.id.quest_saved_quests:

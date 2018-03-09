@@ -21,7 +21,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
     private ListView mLocationList;
     //private TextView mTester;
     //private ArrayList<String> mLocations = new ArrayList<>();
-    private ArrayList<Location> mLocations = new ArrayList<>();
+    private ArrayList<String> mLocations = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
         mLocationList = (ListView) findViewById(R.id.location_list);
         //mTester = (TextView)findViewById(R.id.location);
 
-        final ArrayAdapter<Location>  arrayAdapter = new ArrayAdapter<Location>(this, android.R.layout.simple_list_item_1, mLocations);
+        final ArrayAdapter<String>  arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
         mLocationList.setAdapter(arrayAdapter);
 
         ChildEventListener childEventListener = mDatabase.addChildEventListener(new ChildEventListener() {
@@ -54,8 +54,8 @@ public class SavedQuestsActivity extends AppCompatActivity {
                 String name = dataSnapshot.child("name").getValue().toString();
                 Double latitude = Double.parseDouble(dataSnapshot.child("latitude").getValue().toString());
                 Double longitude = Double.parseDouble(dataSnapshot.child("longitude").getValue().toString());
-                Location newLocation = new Location(id, name, latitude, longitude);
-                mLocations.add(newLocation);
+                //Location newLocation = new Location(id, name, latitude, longitude);
+                mLocations.add(name);
                 arrayAdapter.notifyDataSetChanged();
             }
 

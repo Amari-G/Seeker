@@ -26,12 +26,14 @@ public class Quest {
     String location1;
     String location2;
     String location3;
+    String id;
 
-    public Quest(String name, String location1, String location2, String location3) {
+    public Quest(String name, String location1, String location2, String location3, String id) {
         this.name = name;
         this.location1 = location1;
         this.location2 = location2;
         this.location3 = location3;
+        this.id = id;
     }
 
     public String getName(){
@@ -45,5 +47,7 @@ public class Quest {
     }
 
     public String getLocation3() { return location3; }
+
+    public String getId(){return id;}
 
 }

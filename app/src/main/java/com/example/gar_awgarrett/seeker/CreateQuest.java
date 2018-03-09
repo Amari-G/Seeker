@@ -43,9 +43,21 @@ public class CreateQuest extends AppCompatActivity {
         Editable eb_Loc3 = et_Loc3.getText();
         String locationName3 = eb_Loc3.toString();
 
-        Quest quest = new Quest(questName, locationName1, locationName2, locationName3);
 
-        mDatabase.child(quest.getName());
-        mDatabase.child(quest.getName()).setValue(quest);
+        //creates location in database by generating a new path
+        DatabaseReference newQuestPath = mDatabase.push();
+
+        //creates new string with value set as the locations unique id
+        String pathId = newQuestPath.getKey();
+
+        //creates location the location object with values created above
+        Quest quest = new Quest(questName, locationName1, locationName2, locationName3, pathId);
+
+        //adds location object to the path created on line 59
+        mDatabase.child(pathId).setValue(quest);
+
+        //Restarts activity with empty fields
+        startActivity(new Intent(CreateQuest.this, CreateQuest.class));
+        finish();
     }
 }

@@ -68,6 +68,7 @@
         android:id="@+id/newLocation3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/newLocation2"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/activity_vertical_margin"
@@ -76,16 +77,16 @@
         android:inputType="numberDecimal"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="278dp" />
+        tools:layout_editor_absoluteY="354dp" />
 
     <Button
         android:id="@+id/button_create_quest"
-        android:background="@drawable/button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newLocation2"
+        android:layout_below="@+id/newLocation3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button_create"
         android:text="@string/create" />
 
 
