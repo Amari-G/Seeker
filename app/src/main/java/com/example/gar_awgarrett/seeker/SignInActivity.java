@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -28,13 +29,20 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = (EditText) findViewById(R.id.etSIUsername);
-        editTextPassword = (EditText) findViewById(R.id.etSIPassword);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        editTextEmail = findViewById(R.id.etSIUsername);
+        editTextPassword = findViewById(R.id.etSIPassword);
+        progressBar = findViewById(R.id.progressbar);
 
         findViewById(R.id.tvSignUp).setOnClickListener(this);
         findViewById(R.id.bSISignIn).setOnClickListener(this);
 
+        ImageButton bSIBack = findViewById(R.id.bSIBack);
+        bSIBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignInActivity.this, WelcomeActivity.class));
+            }
+        });
     }
 
     private void userLogin() {
@@ -60,7 +68,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if (password.length() < 6) {
-            editTextPassword.setError("Minimum lenght of password should be 6");
+            editTextPassword.setError("Minimum length of password should be 6");
             editTextPassword.requestFocus();
             return;
         }
@@ -96,6 +104,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+
+            case R.id.bSIBack:
+                finish();
+                startActivity(new Intent(this, WelcomeActivity.class));
+                break;
+
             case R.id.tvSignUp:
                 finish();
                 startActivity(new Intent(this, SignUpActivity.class));
@@ -104,8 +118,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.bSISignIn:
                 userLogin();
                 break;
+
         }
     }
+
+
 }
 
 
