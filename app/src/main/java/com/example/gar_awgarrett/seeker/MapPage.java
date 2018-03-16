@@ -1,5 +1,8 @@
 package com.example.gar_awgarrett.seeker;
 
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -12,6 +15,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,8 +58,22 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
 
-        latitude = mLocation.getLatitude();
-        longitude = mLocation.getLongitude();
+        // Check for location
+        // Alert user
+        if (gpsTracker.canGetLocation)
+        {
+            double latitude = mLocation.getLatitude();
+            double longitude = mLocation.getLongitude();
+
+            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+        }
+        else {
+            gpsTracker.showSettingsAlert();
+        }
+
+
+       // latitude = mLocation.getLatitude();
+      //  longitude = mLocation.getLongitude();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
