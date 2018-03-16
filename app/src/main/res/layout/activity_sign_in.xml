@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
-    android:background="@color/green">
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
+            android:background="@color/green">
 
     <ImageView
+        tools:ignore="ContentDescription"
         android:id="@+id/white_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +18,7 @@
         android:src="@drawable/white_background" />
 
     <ImageView
+        tools:ignore="ContentDescription"
         android:id="@+id/white_background2"
         android:layout_width="5dp"
         android:layout_height="5dp"
@@ -24,6 +27,7 @@
         android:src="@drawable/white_background" />
 
     <ImageView
+        tools:ignore="ContentDescription"
         android:id="@+id/seeker_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -73,8 +77,8 @@
 
 
     <ImageButton
-        tools:ignore="ContentDescription"
         android:id="@+id/bSIBack"
+        tools:ignore="ContentDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -100,4 +104,5 @@
         android:layout_centerVertical="true"
         android:visibility="gone" />
 
-</RelativeLayout>
+    </RelativeLayout>
+

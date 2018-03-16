@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+import android.widget.ImageButton;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,14 +33,22 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        editTextEmail = (EditText) findViewById(R.id.etSUEmail);
-        editTextPassword = (EditText) findViewById(R.id.etSUPassword);
-        progressBar = (ProgressBar) findViewById(R.id.progressbar);
+        editTextEmail = findViewById(R.id.etSUEmail);
+        editTextPassword = findViewById(R.id.etSUPassword);
+        progressBar = findViewById(R.id.progressbar);
 
         mAuth = FirebaseAuth.getInstance();
 
         findViewById(R.id.bSUSignUp).setOnClickListener(this);
         findViewById(R.id.tvSignIn).setOnClickListener(this);
+
+        ImageButton bSUBack = findViewById(R.id.bSUBack);
+        bSUBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignUpActivity.this, WelcomeActivity.class));
+            }
+        });
     }
 
     private void registerUser() {
@@ -65,7 +74,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         if (password.length() < 6) {
-            editTextPassword.setError("Minimum lenght of password should be 6");
+            editTextPassword.setError("Minimum length of password should be 6");
             editTextPassword.requestFocus();
             return;
         }
@@ -104,6 +113,11 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.tvSignIn:
                 finish();
                 startActivity(new Intent(this, SignInActivity.class));
+                break;
+
+            case R.id.bSUBack:
+                finish();
+                startActivity(new Intent(this, WelcomeActivity.class));
                 break;
         }
     }
