@@ -20,6 +20,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     EditText editTextEmail, editTextPassword;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
@@ -86,6 +91,18 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    userRef = database.getReference("Users");
+                    DatabaseReference newUserPath = userRef.push();
+                    String pathId = newUserPath.getKey();
+                    ArrayList<String> arrayList = new ArrayList<>();
+
+                    //create a new user object
+                    User user = new User(email, "", 0, arrayList);
+
+                    //create a new child in the Users branch of the Firebase database
+                    userRef.child(pathId).setValue(user);
+
                     finish();
                     startActivity(new Intent(SignUpActivity.this, MapPage.class));
                 } else {

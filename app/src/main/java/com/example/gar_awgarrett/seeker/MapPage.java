@@ -71,6 +71,16 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 //writeAndReadFromDatabase();
             }
         });
+
+        ImageButton bNBCam = findViewById(R.id.bNBCamera);
+
+        bNBCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(MapPage.this, QuestActivity.class));
+
+            }
+        });
     }
 
     // This method uses the Haversine formula to calculate the distance between two locations given latitudes and longitudes

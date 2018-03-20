@@ -31,7 +31,6 @@ public class Location {
     private Double latitude;
     private Double longitude;
     private Double altitude;
-    //private Double distance;
 
     public Location(String id, String name, Double latitude, Double longitude) {
         this.latitude = latitude;
@@ -48,8 +47,6 @@ public class Location {
         this.name = name;
         this.id = "";
     }
-
-
 
     //return location object's name as a string
     public String getName(){

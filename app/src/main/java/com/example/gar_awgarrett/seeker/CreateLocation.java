@@ -61,7 +61,7 @@ public class CreateLocation extends AppCompatActivity {
                 //creates new string with value set as the locations unique id
                 String pathId = newLocationPath.getKey();
 
-                //creates location the location object with values created above
+                //creates the location object with values created above
                 Location location = new Location(pathId, name, latitude, longitude);
 
                 //adds location object to the path created on line 59
