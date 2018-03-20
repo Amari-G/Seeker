@@ -16,14 +16,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "238021591407-7lp4nia0g4dg6n77f3sa2tpau720sk36.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.gar_awgarrett.seeker",
-            "certificate_hash": "6b71c21ddfd7d45d4954df7c928f0ccc5facfa1c"
-          }
-        },
-        {
           "client_id": "238021591407-p3skh2gunralvehtpa7vn7n8m95epolf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
