@@ -29,8 +29,10 @@ import java.util.ArrayList;
 public class QuestActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private ListView mLocationList;
+    private ListView mQuestList;
     //private TextView mTester;
     private ArrayList<String> mLocations = new ArrayList<>();
+    private ArrayList<String> mQuests = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,31 +41,59 @@ public class QuestActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
         setContentView(R.layout.activity_quest_page);
 
-        //ListView list = findViewById(R.id.locationsList);
-
-        //MyAdapter adapter = new MyAdapter(this, generateData());
-        /*String[] emeraldLocations = {"Space Needle", "Add More Emeralds!"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.target_item, emeraldLocations);*/
-        //list.setAdapter(adapter);
-
-        /*new Model(R.drawable.emerald, "Menu Item 1", "1");
-        new Model("Group Title");*/
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
-        mLocationList = (ListView) findViewById(R.id.location_list);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mLocationList = findViewById(R.id.location_list);
         //mTester = (TextView)findViewById(R.id.location);
 
-        final ArrayAdapter<String>  arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
-        mLocationList.setAdapter(arrayAdapter);
+        final ArrayAdapter<String>  locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
+        mLocationList.setAdapter(locationAdapter);
 
-        mDatabase.addChildEventListener(new ChildEventListener(){
+        mDatabase.child("Emerald Locations").addChildEventListener(new ChildEventListener(){
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
                 //String value = dataSnapshot.getValue(String.class);
-                String value = dataSnapshot.getKey().toString();
-                mLocations.add(value);
-                arrayAdapter.notifyDataSetChanged();
+                String name = dataSnapshot.child("name").getValue().toString();
+                mLocations.add(name);
+                locationAdapter.notifyDataSetChanged();
+                //mTester.setText("Location: " + value);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        final ArrayAdapter<String>  questAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, mLocations);
+
+        mQuestList = findViewById(R.id.location_list);
+        mQuestList.setAdapter(questAdapter);
+
+        mDatabase.child("Quests").addChildEventListener(new ChildEventListener(){
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
+                //String value = dataSnapshot.getValue(String.class);
+                String name = dataSnapshot.child("name").getValue().toString();
+                mQuests.add(name);
+                questAdapter.notifyDataSetChanged();
                 //mTester.setText("Location: " + value);
             }
 
@@ -180,7 +210,7 @@ public class QuestActivity extends AppCompatActivity {
                 break;
             case R.id.action_add_quest:
                 //go to create quest
-                Intent addQuest = new Intent(this, CreateLocation.class);
+                Intent addQuest = new Intent(this, CreateQuest.class);
                 this.startActivity(addQuest);
                 break;
             case R.id.quest_saved_quests:

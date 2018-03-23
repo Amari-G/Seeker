@@ -45,7 +45,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:ems="10"
         android:hint="@string/edit_text_location_name"
-        android:inputType=""
+        android:inputType="text"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="202dp" />
@@ -59,7 +59,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:ems="10"
         android:hint="@string/edit_text_location_name"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="278dp" />
@@ -74,7 +74,7 @@
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:ems="10"
         android:hint="@string/edit_text_location_name"
-        android:inputType="numberDecimal"
+        android:inputType="text"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="354dp" />

@@ -84,7 +84,7 @@ public class SavedQuestsActivity extends AppCompatActivity {
         });
 
     }
-    public ArrayList<Location> getmLocations() {
+    public ArrayList<String> getmLocations() {
         //ArrayList mLocations = null;
         //mLocations = this.mLocations;
         return mLocations;
