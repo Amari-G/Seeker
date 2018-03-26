@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
 
     FirebaseAuth mAuth;
-    EditText editTextEmail, editTextPassword;
+    EditText editTextEmail, editTextPassword, editTextName;
     ProgressBar progressBar;
 
     @Override
@@ -32,6 +32,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editTextEmail = findViewById(R.id.etSIUsername);
         editTextPassword = findViewById(R.id.etSIPassword);
         progressBar = findViewById(R.id.progressbar);
+        editTextName = findViewById(R.id.etSIName);
 
         findViewById(R.id.tvSignUp).setOnClickListener(this);
         findViewById(R.id.bSISignIn).setOnClickListener(this);

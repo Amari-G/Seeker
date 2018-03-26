@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 /**
  * Created by Amy on 11/27/2017.
@@ -23,6 +24,7 @@ public class GPSTracker extends Service implements LocationListener {
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
+    boolean inProximity = false;
 
     Location location;
     protected LocationManager locationManager;
@@ -69,8 +71,14 @@ public class GPSTracker extends Service implements LocationListener {
 
     }
 
+    //public void checkUserProximity
+
+
+
     // followings are the default method if we implement LocationListener //
     public void onLocationChanged(Location location) {
+        Log.i("called", "onLocationChanged");
+
 
     }
 

@@ -39,6 +39,19 @@
 
 
     <EditText
+        android:id="@+id/etSIName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/white_background2"
+        android:layout_alignStart="@+id/etSIUsername"
+        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:hint="@string/edit_text_password"
+        android:inputType="textPersonName"
+        />
+
+    <EditText
         android:id="@+id/etSIUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,6 +73,8 @@
         android:hint="@string/edit_text_password"
         android:inputType="textPassword"
         />
+
+
 
     <Button
         android:id="@+id/bSISignIn"
