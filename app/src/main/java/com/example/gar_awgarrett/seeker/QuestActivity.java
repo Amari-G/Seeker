@@ -18,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -168,6 +169,7 @@ public class QuestActivity extends AppCompatActivity {
                 break;
             case R.id.quest_Sign_Out:
                 //go to welcome page
+                FirebaseAuth.getInstance().signOut();
                 Intent signOut = new Intent(this, WelcomeActivity.class);
                 this.startActivity(signOut);
                 break;
