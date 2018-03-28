@@ -64,10 +64,10 @@ public class CreateQuest extends AppCompatActivity {
                 String pathId = newQuestPath.getKey();
 
                 //creates location the location object with values created above
-                Quest quest = new Quest(questName, locationName1, locationName2, locationName3, pathId);
+                //Quest quest = new Quest(questName, locationName1, locationName2, locationName3, pathId);
 
                 //adds location object to the path created on line 59
-                rDatabase.child(pathId).setValue(quest);
+                //rDatabase.child(pathId).setValue(quest);
 
                 //Restarts activity with empty fields
                 startActivity(new Intent(CreateQuest.this, CreateQuest.class));
