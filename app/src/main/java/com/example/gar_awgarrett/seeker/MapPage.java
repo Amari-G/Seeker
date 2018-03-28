@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private GPSTracker gpsTracker;
     private Location mLocation;
     double latitude, longitude;
+    FragmentManager fm = getSupportFragmentManager();
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
@@ -87,6 +89,17 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             public void onClick(View view) {
                 startActivity(new Intent(MapPage.this, QuestActivity.class));
                 //writeAndReadFromDatabase();
+            }
+        });
+
+        ImageButton bNBCam = findViewById(R.id.bNBCamera);
+
+        bNBCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(MapPage.this, QuestActivity.class));
+                EmeraldCollector emeraldCollector = new EmeraldCollector();
+                emeraldCollector.show(fm, "Emerald Collector");
             }
         });
     }
@@ -210,8 +223,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         mMap = googleMap;
         LatLng latLngLocation = new LatLng(location.getLatitude(), location.getLongitude());
         String distanceToMarker = String.valueOf(MapPage.distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0)) + " mi";
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
         mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
     }
 }

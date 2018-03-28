@@ -101,14 +101,16 @@
         android:textColor="@android:color/white"
         android:textSize="15sp" /> -->
     <ImageButton
-        tools:ignore="ContentDescription"
         android:id="@+id/bSUBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="11dp"
         android:background="@android:color/transparent"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        tools:ignore="ContentDescription" />
     <TextView
         android:id="@+id/tvSignIn"
         android:layout_width="wrap_content"

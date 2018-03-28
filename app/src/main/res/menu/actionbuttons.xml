@@ -21,7 +21,7 @@
         android:id="@+id/quest_settings"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/button_name_settings"
-        app:showAsAction="always" />
+        app:showAsAction="never" />
     <item
         android:id="@+id/quest_Sign_Out"
         android:icon="@drawable/ic_sign_out_black_24dp"
