@@ -20,24 +20,20 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     ProgressBar progressBar;
-    EditText editTextEmail, editTextPassword;
+    EditText editTextEmail, editTextPassword, editTextName;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference userRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        editTextName = findViewById(R.id.etSUName);
         editTextEmail = findViewById(R.id.etSUEmail);
         editTextPassword = findViewById(R.id.etSUPassword);
         progressBar = findViewById(R.id.progressbar);
@@ -57,7 +53,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        final String email = editTextEmail.getText().toString().trim();
+        String name = editTextName.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
@@ -84,6 +81,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+        if (name.isEmpty()) {
+            editTextName.setError("Name is required");
+            editTextName.requestFocus();
+            return;
+        }
+
         progressBar.setVisibility(View.VISIBLE);
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -91,18 +94,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    userRef = database.getReference("Users");
-                    DatabaseReference newUserPath = userRef.push();
-                    String pathId = newUserPath.getKey();
-                    ArrayList<String> arrayList = new ArrayList<>();
-
-                    //create a new user object
-                    User user = new User(email, "", 0, arrayList);
-
-                    //create a new child in the Users branch of the Firebase database
-                    userRef.child(pathId).setValue(user);
-
                     finish();
                     startActivity(new Intent(SignUpActivity.this, MapPage.class));
                 } else {
