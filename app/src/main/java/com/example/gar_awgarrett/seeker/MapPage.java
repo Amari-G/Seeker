@@ -1,10 +1,14 @@
 package com.example.gar_awgarrett.seeker;
 
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +16,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,6 +43,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private GPSTracker gpsTracker;
     private Location mLocation;
     double latitude, longitude;
+    FragmentManager fm = getSupportFragmentManager();
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
@@ -54,8 +60,22 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
 
-        latitude = mLocation.getLatitude();
-        longitude = mLocation.getLongitude();
+        // Check for location
+        // Alert user
+        if (gpsTracker.canGetLocation)
+        {
+            double latitude = mLocation.getLatitude();
+            double longitude = mLocation.getLongitude();
+
+            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+        }
+        else {
+            gpsTracker.showSettingsAlert();
+        }
+
+
+       // latitude = mLocation.getLatitude();
+      //  longitude = mLocation.getLongitude();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -78,7 +98,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(MapPage.this, QuestActivity.class));
-
+                EmeraldCollector emeraldCollector = new EmeraldCollector();
+                emeraldCollector.show(fm, "Emerald Collector");
             }
         });
     }
@@ -202,8 +223,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         mMap = googleMap;
         LatLng latLngLocation = new LatLng(location.getLatitude(), location.getLongitude());
         String distanceToMarker = String.valueOf(MapPage.distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0)) + " mi";
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
         mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
     }
 }

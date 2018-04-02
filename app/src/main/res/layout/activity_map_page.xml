@@ -60,22 +60,22 @@
             android:src="@android:drawable/ic_menu_sort_by_size"
             android:tint="@android:color/black" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/bNBCamera"
-        android:layout_marginTop="31dp"
-        android:background="@color/emerald_tracker_background"
-        android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
-        android:drawableLeft="@drawable/emerald_resized_2"
-        android:paddingBottom="5dp"
-        android:paddingLeft="7dp"
-        android:paddingRight="7dp"
-        android:paddingTop="5dp"
-        android:text=" collected: 2"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/bNBCamera"
+            android:layout_marginTop="31dp"
+            android:background="@color/emerald_tracker_background"
+            android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+            android:drawableLeft="@drawable/emerald_resized_2"
+            android:paddingBottom="5dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:paddingTop="5dp"
+            android:text=" collected: 2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 </RelativeLayout>
