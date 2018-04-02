@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,10 +30,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
+
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
     ProgressBar progressBar;
-    EditText editTextEmail, editTextPassword;
+    EditText editTextEmail, editTextPassword, editTextName;
 
     private FirebaseAuth mAuth;
     private DatabaseReference userRef;
@@ -43,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        editTextName = findViewById(R.id.etSUName);
         editTextEmail = findViewById(R.id.etSUEmail);
         editTextPassword = findViewById(R.id.etSUPassword);
         progressBar = findViewById(R.id.progressbar);
@@ -62,7 +65,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        final String email = editTextEmail.getText().toString().trim();
+        String name = editTextName.getText().toString().trim();
+        String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
@@ -86,6 +90,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         if (password.length() < 6) {
             editTextPassword.setError("Minimum length of password should be 6");
             editTextPassword.requestFocus();
+            return;
+        }
+
+        if (name.isEmpty()) {
+            editTextName.setError("Name is required");
+            editTextName.requestFocus();
             return;
         }
 
@@ -148,7 +158,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                         }
                     });
-
+                  
                     finish();
                     startActivity(new Intent(SignUpActivity.this, MapPage.class));
                 } else {

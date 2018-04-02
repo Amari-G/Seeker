@@ -29,7 +29,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         mAuth = FirebaseAuth.getInstance();
 
-        editTextEmail = findViewById(R.id.etSIUsername);
+        editTextEmail = findViewById(R.id.etSIEmail);
         editTextPassword = findViewById(R.id.etSIPassword);
         progressBar = findViewById(R.id.progressbar);
 
@@ -124,5 +124,3 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
 
 }
-
-
