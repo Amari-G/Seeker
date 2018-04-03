@@ -46,7 +46,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateLocation" />
-        <activity android:name=".CreateQuest" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
@@ -62,6 +61,7 @@
             android:name=".SavedQuestsActivity"
             android:label="@string/title_activity_saved_quests"
             android:theme="@style/AppTheme"/>
+        <activity android:name=".CreateQuest" />
     </application>
 
 </manifest>
