@@ -76,9 +76,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             gpsTracker.showSettingsAlert();
         }
 
-
-       // latitude = mLocation.getLatitude();
-      //  longitude = mLocation.getLongitude();
+        latitude = mLocation.getLatitude();
+        longitude = mLocation.getLongitude();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
