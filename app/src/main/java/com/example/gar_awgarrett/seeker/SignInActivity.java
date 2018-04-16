@@ -32,7 +32,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         editTextEmail = findViewById(R.id.etSIEmail);
         editTextPassword = findViewById(R.id.etSIPassword);
         progressBar = findViewById(R.id.progressbar);
-        editTextName = findViewById(R.id.etSIName);
 
         findViewById(R.id.tvSignUp).setOnClickListener(this);
         findViewById(R.id.bSISignIn).setOnClickListener(this);
