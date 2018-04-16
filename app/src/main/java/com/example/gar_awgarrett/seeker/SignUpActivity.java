@@ -65,8 +65,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void registerUser() {
-        String name = editTextName.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
+        final String name = editTextName.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
@@ -113,27 +113,31 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     userRef = database.getReference("Users");
                     DatabaseReference newUserPath = userRef.push();
                     final String pathId = newUserPath.getKey();
+
+                    //create a new user object
+                    User user = new User(email, name, 0, "");
+
+                    //create a new child in the Users branch of the Firebase database
+                    userRef.child(pathId).setValue(user);
+                    collectedRef = FirebaseDatabase.getInstance().getReference().child("Users").child(pathId).child("collectedLocations");
+                    //DatabaseReference newUserLocationPath = collectedRef.push();
+                    //String locationPathId = newUserLocationPath.getKey();
+                    //collectedRef.child(locationPathId).setValue("false");
                     //final String[] locations = new String[]{};
                     DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
                     ChildEventListener childEventListener = mDatabase.addChildEventListener(new ChildEventListener() {
                         @Override
                         public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            //DatabaseReference newUserLocationPath = collectedRef.push();
                             String id = dataSnapshot.getKey();
+                            collectedRef.child(id).setValue("false");
                             //locations.add(id);
                             //locations.add(id);
                             //next two lines keeps track of mLocations size for testing
                             //int size = locations.size();
                             //Log.i("mLocations", "Size is: " + String.valueOf(size));
 
-                            //create a new user object
-                            User user = new User(email, "", 0, "");
 
-                            //create a new child in the Users branch of the Firebase database
-                            userRef.child(pathId).setValue(user);
-                            collectedRef = FirebaseDatabase.getInstance().getReference().child("Users").child(pathId).child("collectedLocations");
-                            DatabaseReference newUserLocationPath = collectedRef.push();
-                            String locationPathId = newUserLocationPath.getKey();
-                            collectedRef.child(locationPathId).setValue("false");
                             //for (String location : locations){
                             //    collectedRef.child(location).setValue("false");
                             //}
