@@ -1,3 +1,4 @@
+
 package com.example.gar_awgarrett.seeker;
 
 
@@ -162,7 +163,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                         }
                     });
-                  
+
                     finish();
                     startActivity(new Intent(SignUpActivity.this, MapPage.class));
                 } else {
