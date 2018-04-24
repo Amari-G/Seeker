@@ -11,10 +11,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class EmeraldCollector extends DialogFragment {
 
+    private static final String TAG = "EmeraldCollector";
+
+    private EditText mInput;
+    private TextView mActionOk, mActionCancel;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -27,10 +33,11 @@ public class EmeraldCollector extends DialogFragment {
                         //do something else
                     }
                 })
-                .setNegativeButton("Skip", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                //.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
+                    //public void onClick(DialogInterface dialog, int which) {
                         //do something else
-                    }
-                }).create();
+                    //}
+                //})
+                .create();
     }
 }
