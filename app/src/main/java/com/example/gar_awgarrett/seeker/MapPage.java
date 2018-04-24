@@ -45,9 +45,13 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
     FragmentManager fm = getSupportFragmentManager();
+    int collectedCounter = 0;
+    public TextView mInputDisplay;
+    public String mInput;
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
+    private ArrayList<String> collectedLocations = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +62,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
         TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(" collected: ");
+        textView.setText(" collected: " + collectedCounter);
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
@@ -85,7 +89,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         ImageButton bNBQuest = findViewById(R.id.bNBList);
-
+        //mInputDisplay = findViewById(R.id.input_display);
         bNBQuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,9 +106,13 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 //startActivity(new Intent(MapPage.this, QuestActivity.class));
                 EmeraldCollector emeraldCollector = new EmeraldCollector();
                 emeraldCollector.show(fm, "Emerald Collector");
+                collectedCounter++;
+                TextView textView = (TextView) findViewById(R.id.textView);
+                textView.setText(" collected: " + collectedCounter);
             }
         });
     }
+
 
     // This method uses the Haversine formula to calculate the distance between two locations given latitudes and longitudes
     // Distance is in miles, rounded to two decimal places
