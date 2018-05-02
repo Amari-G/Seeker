@@ -32,23 +32,13 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/seekertextpng" />
 
-    <EditText
-        android:id="@+id/etSUName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/etSUEmail"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="@string/edit_text_name"
-        android:inputType="textPersonName" />
-
 
     <EditText
         android:id="@+id/etSUEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/white_background2"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:ems="10"
         android:hint="@string/edit_text_email"
         android:inputType="textEmailAddress" />
@@ -68,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/etSUEmail"
-        android:layout_below="@id/etSUEmail"
+        android:layout_below="@+id/white_background2"
         android:ems="10"
         android:hint="@string/edit_text_password"
         android:inputType="textPassword" />

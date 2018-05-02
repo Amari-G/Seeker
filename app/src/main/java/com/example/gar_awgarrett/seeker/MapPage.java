@@ -1,8 +1,5 @@
 package com.example.gar_awgarrett.seeker;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -16,8 +13,6 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,14 +40,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
     FragmentManager fm = getSupportFragmentManager();
-    int collectedCounter = 0;
-    public TextView mInputDisplay;
-    public String mInput;
 
     private boolean inProximity;
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
-    private ArrayList<String> collectedLocations = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,25 +53,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(" collected: " + collectedCounter);
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
-
-        // Check for location
-        // Alert user
-        if (gpsTracker.canGetLocation)
-        {
-            double latitude = mLocation.getLatitude();
-            double longitude = mLocation.getLongitude();
-
-            //Toast.makeText(getApplicationContext(), "Your Location : \nLatitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), "Happy emerald hunting!", Toast.LENGTH_LONG).show();
-        }
-        else {
-            gpsTracker.showSettingsAlert();
-        }
 
         latitude = mLocation.getLatitude();
         longitude = mLocation.getLongitude();
@@ -91,7 +66,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         ImageButton bNBQuest = findViewById(R.id.bNBList);
-        //mInputDisplay = findViewById(R.id.input_display);
+
         bNBQuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,13 +83,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 //startActivity(new Intent(MapPage.this, QuestActivity.class));
                 EmeraldCollector emeraldCollector = new EmeraldCollector();
                 emeraldCollector.show(fm, "Emerald Collector");
-                collectedCounter++;
-                TextView textView = (TextView) findViewById(R.id.textView);
-                textView.setText(" collected: " + collectedCounter);
             }
         });
     }
-
 
     // This method uses the Haversine formula to calculate the distance between two locations given latitudes and longitudes
     // Distance is in miles, rounded to two decimal places
