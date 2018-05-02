@@ -1,5 +1,10 @@
 package com.example.gar_awgarrett.seeker;
 
+
+import android.support.v7.view.menu.MenuView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -13,6 +18,8 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,9 +47,17 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
     FragmentManager fm = getSupportFragmentManager();
+    int collectedCounter = 0;
+    public TextView mInputDisplay;
+    public String mInput;
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
+    private ArrayList<String> collectedLocations = new ArrayList<>();
+
+    private boolean inProximity;
+
+    com.example.gar_awgarrett.seeker.Location proximateLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +67,23 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(" collected: " + collectedCounter);
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
+
+        // Check for location
+        // Alert user
+        if (gpsTracker.canGetLocation) {
+            double latitude = mLocation.getLatitude();
+            double longitude = mLocation.getLongitude();
+
+            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+        } else {
+            gpsTracker.showSettingsAlert();
+        }
+
 
         latitude = mLocation.getLatitude();
         longitude = mLocation.getLongitude();
@@ -65,7 +94,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         mapFragment.getMapAsync(this);
 
         ImageButton bNBQuest = findViewById(R.id.bNBList);
-
+        //mInputDisplay = findViewById(R.id.input_display);
         bNBQuest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +103,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             }
         });
 
-        ImageButton bNBCam = findViewById(R.id.bNBCamera);
+        /*ImageButton bNBCam = findViewById(R.id.bNBCamera);
 
         bNBCam.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,9 +111,13 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 //startActivity(new Intent(MapPage.this, QuestActivity.class));
                 EmeraldCollector emeraldCollector = new EmeraldCollector();
                 emeraldCollector.show(fm, "Emerald Collector");
+                collectedCounter++;
+                TextView textView = (TextView) findViewById(R.id.textView);
+                textView.setText(" collected: " + collectedCounter);
             }
-        });
+        });*/
     }
+
 
     // This method uses the Haversine formula to calculate the distance between two locations given latitudes and longitudes
     // Distance is in miles, rounded to two decimal places
@@ -201,12 +234,41 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         });
     }
 
-    public void displayLocation(GoogleMap googleMap, com.example.gar_awgarrett.seeker.Location location){
+    public void displayLocation(GoogleMap googleMap, com.example.gar_awgarrett.seeker.Location location) {
         mMap = googleMap;
         LatLng latLngLocation = new LatLng(location.getLatitude(), location.getLongitude());
         String distanceToMarker = String.valueOf(MapPage.distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0)) + " mi";
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
-        mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
+        mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker).icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
+        checkInProximity(mLocations, latitude, longitude);
+        if(proximateLocation == null){
+            inProximity = false;
+        }
+
+        if (!(proximateLocation == null)) {
+            inProximity = true;
+        }
+
+
+        if (inProximity) {
+            EmeraldCollector emeraldCollector = new EmeraldCollector();
+            emeraldCollector.show(fm, "Emerald Collector");
+
+        }
+    }
+
+    public com.example.gar_awgarrett.seeker.Location checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude) {
+        for (int i = 0; i <= mLocations.size() - 1; i++) {
+            double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
+            if (distance <= 0.1) {
+                proximateLocation = mLocations.get(i);
+            }
+
+        }
+
+        return proximateLocation;
     }
 }
+
+
