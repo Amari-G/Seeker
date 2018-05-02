@@ -39,21 +39,21 @@
 
 
     <EditText
-        android:id="@+id/etSIEmail"
+        android:id="@+id/etSIUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/white_background2"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="@string/edit_text_email"
-        android:inputType="textEmailAddress" />
+        android:hint="@string/edit_text_username"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/etSIPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/white_background2"
-        android:layout_alignStart="@+id/etSIEmail"
+        android:layout_alignStart="@+id/etSIUsername"
         android:ems="10"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"

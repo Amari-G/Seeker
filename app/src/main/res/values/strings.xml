@@ -10,7 +10,7 @@
     <string name="button_name_sign_up">Sign Up</string>
     <string name="button_name_sign_in">Sign In</string>
     <string name="button_name_sign_out">Sign Out</string>
-    <string name="edit_text_name">Name</string>
+    <string name="edit_text_username">Username</string>
     <string name="edit_text_password">Password</string>
     <string name="go_back">Back</string>
     <string name="edit_text_email">Email</string>

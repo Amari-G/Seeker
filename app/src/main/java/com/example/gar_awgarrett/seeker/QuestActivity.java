@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -90,16 +89,11 @@ public class QuestActivity extends AppCompatActivity {
         mDatabase.child("Quests").addChildEventListener(new ChildEventListener(){
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if(dataSnapshot.child("name").getValue() != null) {
-                    String name = dataSnapshot.child("name").getValue().toString();
-                    mQuests.add(name);
-                    questAdapter.notifyDataSetChanged();
-                } else {
-                    Log.e("Database Error: ", "Could not find any quests");
-                    String name = "You don't have any active quests.";
-                }
                 //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
                 //String value = dataSnapshot.getValue(String.class);
+                String name = dataSnapshot.child("name").getValue().toString();
+                mQuests.add(name);
+                questAdapter.notifyDataSetChanged();
                 //mTester.setText("Location: " + value);
             }
 
@@ -130,13 +124,13 @@ public class QuestActivity extends AppCompatActivity {
         //creates quest page button in navigation bar
         ImageButton bNBQuest = findViewById(R.id.bNBList);
 
-       /*
-       //links quest page button to quest page
-       bNBQuest.setOnClickListener(new View.OnClickListener() {
-           public void onClick(View v) {
-               startActivity(new Intent(QuestActivity.this, QuestActivity.class));
-           }
-       });*/
+        /*
+        //links quest page button to quest page
+        bNBQuest.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(QuestActivity.this, QuestActivity.class));
+            }
+        });*/
 
         //creates map page button in navigation bar
         ImageButton bNBMap = findViewById(R.id.bNBMap);
@@ -160,32 +154,32 @@ public class QuestActivity extends AppCompatActivity {
             }
         });
     }
-   /*
-   @Override
-   public void startActivity(Intent intent) {
-       super.startActivity(intent);
-       onStartNewActivity();
-   }
+    /*
+    @Override
+    public void startActivity(Intent intent) {
+        super.startActivity(intent);
+        onStartNewActivity();
+    }
 
-   @Override
-   public void startActivity(Intent intent, Bundle options) {
-       super.startActivity(intent, options);
-       onStartNewActivity();
-   }
+    @Override
+    public void startActivity(Intent intent, Bundle options) {
+        super.startActivity(intent, options);
+        onStartNewActivity();
+    }
 
-   protected void onStartNewActivity() {
-       overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_left);
-   }
+    protected void onStartNewActivity() {
+        overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_left);
+    }
 
-   @Override
-   public void finish() {
-       super.finish();
-       onLeaveThisActivity();
-   }
+    @Override
+    public void finish() {
+        super.finish();
+        onLeaveThisActivity();
+    }
 
-   protected void onLeaveThisActivity() {
-       overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-   }*/
+    protected void onLeaveThisActivity() {
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
