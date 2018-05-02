@@ -49,6 +49,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     public TextView mInputDisplay;
     public String mInput;
 
+    private boolean inProximity;
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
     private ArrayList<String> collectedLocations = new ArrayList<>();
@@ -74,7 +75,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             double latitude = mLocation.getLatitude();
             double longitude = mLocation.getLongitude();
 
-            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Location : \nLatitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Happy emerald hunting!", Toast.LENGTH_LONG).show();
         }
         else {
             gpsTracker.showSettingsAlert();
@@ -236,5 +238,22 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
         mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
+        checkInProximity(mLocations, latitude, longitude);
+        if (inProximity){
+            EmeraldCollector emeraldCollector = new EmeraldCollector();
+            emeraldCollector.show(fm, "Emerald Collector");
+        }
+    }
+
+    public boolean checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
+
+        for(int i = 0; i <= mLocations.size() - 1; i++){
+            double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
+            if(distance <= 0.1){
+                inProximity = true;
+            }
+        }
+
+        return inProximity;
     }
 }
