@@ -28,11 +28,6 @@
 
     <string name="button_name_search">Search</string>
 
-    <!--Strings for Bottom Navigation Bar-->
-    <string name="nav_map">Map</string>
-    <string name="nav_cam">Camera</string>
-    <string name="nav_quests">Quests</string>
-
     <!--Strings for Quest page-->
     <string name="quests">Quests</string>
     <string name="saved_quests">Saved Quests</string>

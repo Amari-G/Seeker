@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +26,7 @@
         android:id="@+id/newQuestName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/newLocation1"
+        android:layout_above="@+id/button_create_quest"
         android:layout_alignParentStart="true"
         android:ems="10"
         android:hint="@string/edit_text_quest_name"
@@ -36,7 +35,7 @@
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="126dp" />
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/newLocation1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,11 +48,9 @@
         android:inputType="text"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="202dp" >
-        <requestFocus />
-    </AutoCompleteTextView>
+        tools:layout_editor_absoluteY="202dp" />
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/newLocation2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,11 +62,9 @@
         android:inputType="text"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="278dp" >
-        <requestFocus />
-    </AutoCompleteTextView>
+        tools:layout_editor_absoluteY="278dp" />
 
-    <AutoCompleteTextView
+    <EditText
         android:id="@+id/newLocation3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -82,30 +77,17 @@
         android:inputType="text"
         android:textAlignment="center"
         tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="354dp" >
-        <requestFocus />
-    </AutoCompleteTextView>
+        tools:layout_editor_absoluteY="354dp" />
 
     <Button
         android:id="@+id/button_create_quest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newLocation3"
+        android:layout_below="@+id/newQuestName"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@drawable/button_create"
         android:text="@string/create" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="70dp"
-        android:layout_marginStart="42dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@android:drawable/ic_menu_search" />
 
 
 </RelativeLayout>

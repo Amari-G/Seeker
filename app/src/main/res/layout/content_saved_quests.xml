@@ -10,42 +10,20 @@
     tools:context="com.example.gar_awgarrett.seeker.QuestActivity"
     tools:showIn="@layout/activity_quest_page">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:text="Tracked Locations"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="center_vertical"
-        />
-
     <ListView
         android:id="@+id/location_list"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
+        android:layout_height="0dp"
         android:layout_weight="1"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="1dp">
-
-    </ListView>
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:text="Active Quests"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:gravity="center_vertical" />
+        tools:layout_editor_absoluteY="1dp" />
 
     <ListView
         android:id="@+id/quest_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
         android:layout_weight="1"
+        android:layout_marginTop="5dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="1dp" />
-
 </LinearLayout>

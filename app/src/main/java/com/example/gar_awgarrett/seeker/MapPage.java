@@ -3,19 +3,11 @@ package com.example.gar_awgarrett.seeker;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.content.res.AppCompatResources;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -29,7 +21,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,7 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Map;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
@@ -74,31 +64,24 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        BottomNavigationView navView = findViewById(R.id.bottom_navigation_view);
-        navView.setItemTextColor(AppCompatResources.getColorStateList(this, R.color.nav_bar_anim));
-        BottomNavigationViewHelper.disableShiftMode(navView);
+        ImageButton bNBQuest = findViewById(R.id.bNBList);
 
-        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        bNBQuest.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.bNBCamera:
-                        //launch emerald collector
-                        EmeraldCollector emeraldCollector = new EmeraldCollector();
-                        emeraldCollector.show(fm, "Emerald Collector");
-                        break;
-                    case R.id.bNBMap:
-                        //go to map page
-                        break;
-                    case R.id.bNBQuests:
-                        //go to quest page
-                        Intent quest = new Intent(getApplicationContext(), QuestActivity.class);
-                        startActivity(quest);
-                        break;
-                    default:
-                        return MapPage.super.onOptionsItemSelected(item);
-                }
-                return true;
+            public void onClick(View view) {
+                startActivity(new Intent(MapPage.this, QuestActivity.class));
+                //writeAndReadFromDatabase();
+            }
+        });
+
+        ImageButton bNBCam = findViewById(R.id.bNBCamera);
+
+        bNBCam.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(MapPage.this, QuestActivity.class));
+                EmeraldCollector emeraldCollector = new EmeraldCollector();
+                emeraldCollector.show(fm, "Emerald Collector");
             }
         });
     }
@@ -143,6 +126,16 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 11.5f));
+
+        //The following is sample code to add a marker at a locally saved Space Needle location
+        /*
+        double endLat = 47.6205;
+        double endLong = -122.3493;
+        LatLng spaceNeedle = new LatLng(endLat, endLong);
+        String distanceToMarker = String.valueOf(distance(latitude, endLat, longitude, endLong, 0.0, 0.0)) + " mi";
+        com.example.gar_awgarrett.seeker.Location spaceNeedleLocation = new com.example.gar_awgarrett.seeker.Location("Space Needle testing id", "Space Needle 1", endLat, endLong);
+        displayLocation(mMap, spaceNeedleLocation);
+        */
 
         //Retrieve emerald locations from Firebase database and automatically display them on the map
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
