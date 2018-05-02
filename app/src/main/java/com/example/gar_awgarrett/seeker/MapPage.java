@@ -1,23 +1,26 @@
 package com.example.gar_awgarrett.seeker;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.content.res.AppCompatResources;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,6 +29,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
@@ -45,15 +50,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
     FragmentManager fm = getSupportFragmentManager();
-    int collectedCounter = 0;
-    public TextView mInputDisplay;
-    public String mInput;
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
-    private ArrayList<String> collectedLocations = new ArrayList<>();
-
-    private boolean inProximity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,59 +62,46 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
-        TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(" collected: " + collectedCounter);
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
 
-        // Check for location
-        // Alert user
-        if (gpsTracker.canGetLocation)
-        {
-            double latitude = mLocation.getLatitude();
-            double longitude = mLocation.getLongitude();
-
-            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
-        }
-        else {
-            gpsTracker.showSettingsAlert();
-        }
-
-
-            latitude = mLocation.getLatitude();
-            longitude = mLocation.getLongitude();
+        latitude = mLocation.getLatitude();
+        longitude = mLocation.getLongitude();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        ImageButton bNBQuest = findViewById(R.id.bNBList);
-        //mInputDisplay = findViewById(R.id.input_display);
-        bNBQuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MapPage.this, QuestActivity.class));
-                //writeAndReadFromDatabase();
-            }
-        });
+        BottomNavigationView navView = findViewById(R.id.bottom_navigation_view);
+        navView.setItemTextColor(AppCompatResources.getColorStateList(this, R.color.nav_bar_anim));
+        BottomNavigationViewHelper.disableShiftMode(navView);
 
-        ImageButton bNBCam = findViewById(R.id.bNBCamera);
-
-        bNBCam.setOnClickListener(new View.OnClickListener() {
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(MapPage.this, QuestActivity.class));
-                EmeraldCollector emeraldCollector = new EmeraldCollector();
-                emeraldCollector.show(fm, "Emerald Collector");
-                collectedCounter++;
-                TextView textView = (TextView) findViewById(R.id.textView);
-                textView.setText(" collected: " + collectedCounter);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bNBCamera:
+                        //launch emerald collector
+                        EmeraldCollector emeraldCollector = new EmeraldCollector();
+                        emeraldCollector.show(fm, "Emerald Collector");
+                        break;
+                    case R.id.bNBMap:
+                        //go to map page
+                        break;
+                    case R.id.bNBQuests:
+                        //go to quest page
+                        Intent quest = new Intent(getApplicationContext(), QuestActivity.class);
+                        startActivity(quest);
+                        break;
+                    default:
+                        return MapPage.super.onOptionsItemSelected(item);
+                }
+                return true;
             }
         });
     }
-
 
     // This method uses the Haversine formula to calculate the distance between two locations given latitudes and longitudes
     // Distance is in miles, rounded to two decimal places
@@ -157,16 +143,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(currentLocation).title("Current Location"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentLocation));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 11.5f));
-
-        //The following is sample code to add a marker at a locally saved Space Needle location
-        /*
-        double endLat = 47.6205;
-        double endLong = -122.3493;
-        LatLng spaceNeedle = new LatLng(endLat, endLong);
-        String distanceToMarker = String.valueOf(distance(latitude, endLat, longitude, endLong, 0.0, 0.0)) + " mi";
-        com.example.gar_awgarrett.seeker.Location spaceNeedleLocation = new com.example.gar_awgarrett.seeker.Location("Space Needle testing id", "Space Needle 1", endLat, endLong);
-        displayLocation(mMap, spaceNeedleLocation);
-        */
 
         //Retrieve emerald locations from Firebase database and automatically display them on the map
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
@@ -239,24 +215,5 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
         mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
-        checkInProximity(mLocations, latitude, longitude);
-        if (inProximity){
-            EmeraldCollector emeraldCollector = new EmeraldCollector();
-            emeraldCollector.show(fm, "Emerald Collector");
-        }
-    }
-
-    public boolean checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
-
-        for(int i = 0; i <= mLocations.size() - 1; i++){
-            double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
-            if(distance <= 0.1){
-                inProximity = true;
-            }
-        }
-
-        return inProximity;
     }
 }
-
-
