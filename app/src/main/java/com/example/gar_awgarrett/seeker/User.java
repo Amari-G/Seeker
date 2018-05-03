@@ -10,9 +10,9 @@ public class User {
     private String email;
     private String name;
     private int collected;
-    private ArrayList<String> collectedLocations;
+    private String collectedLocations;
 
-    public User(String email, String name, int collected, ArrayList<String> collectedLocations) {
+    public User(String email, String name, int collected, String collectedLocations) {
         this.email = email;
         this.name = name;
         this.collected = collected;
@@ -31,7 +31,7 @@ public class User {
         return collected;
     }
 
-    public ArrayList<String> getCollectedLocations() {
+    public String getCollectedLocations() {
         return collectedLocations;
     }
 
@@ -47,8 +47,7 @@ public class User {
         this.collected = collected;
     }
 
-    public void setCollectedLocations(ArrayList<String> collectedLocations) {
+    public void setCollectedLocations(String collectedLocations) {
         this.collectedLocations = collectedLocations;
     }
 }
-
