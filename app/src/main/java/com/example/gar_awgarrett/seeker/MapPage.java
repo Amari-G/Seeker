@@ -213,6 +213,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         if (inProximity){
             EmeraldCollector emeraldCollector = new EmeraldCollector();
             emeraldCollector.show(fm, "Emerald Collector");
+            /*collectedCounter++;
+            TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText(" collected: " + collectedCounter);*/
         }
     }
 

@@ -50,5 +50,7 @@ public class User {
     public void setCollectedLocations(ArrayList<String> collectedLocations) {
         this.collectedLocations = collectedLocations;
     }
+
+    public void updateCollected (){collected++;}
 }
 
