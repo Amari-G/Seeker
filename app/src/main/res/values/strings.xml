@@ -10,6 +10,7 @@
     <string name="button_name_sign_up">Sign Up</string>
     <string name="button_name_sign_in">Sign In</string>
     <string name="button_name_sign_out">Sign Out</string>
+    <string name="edit_text_name">Name</string>
     <string name="edit_text_username">Username</string>
     <string name="edit_text_password">Password</string>
     <string name="go_back">Back</string>
@@ -17,7 +18,6 @@
     <string name="button_name_back">Back</string>
     <string name="create_account">Don\'t have account? Sign Up</string>
     <string name="existing_account">Already have account? Sign In</string>
-    <string name="edit_text_name">Name</string>
 
     <!--Strings for settings-->
     <string name="button_name_settings">Settings</string>
@@ -28,6 +28,11 @@
     <string name="button_name_create_location">Create a Location</string>
 
     <string name="button_name_search">Search</string>
+
+    <!--Strings for Bottom Navigation Bar-->
+    <string name="nav_map">Map</string>
+    <string name="nav_cam">Camera</string>
+    <string name="nav_quests">Quests</string>
 
     <!--Strings for Quest page-->
     <string name="quests">Quests</string>

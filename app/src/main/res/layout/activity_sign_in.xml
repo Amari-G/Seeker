@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
-            android:background="@color/green">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
+    android:background="@color/green">
 
     <ImageView
         tools:ignore="ContentDescription"
@@ -39,21 +39,21 @@
 
 
     <EditText
-        android:id="@+id/etSIUsername"
+        android:id="@+id/etSIEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/white_background2"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="@string/edit_text_username"
-        android:inputType="textPersonName" />
+        android:hint="@string/edit_text_email"
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/etSIPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/white_background2"
-        android:layout_alignStart="@+id/etSIUsername"
+        android:layout_alignStart="@+id/etSIEmail"
         android:ems="10"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -78,6 +78,7 @@
 
     <ImageButton
         android:id="@+id/bSIBack"
+        tools:ignore="ContentDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -85,8 +86,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        tools:ignore="ContentDescription" />
+        app:srcCompat="@android:drawable/ic_menu_revert"/>
 
     <TextView
         android:id="@+id/tvSignUp"
@@ -106,5 +106,4 @@
         android:layout_centerVertical="true"
         android:visibility="gone" />
 
-    </RelativeLayout>
-
+</RelativeLayout>
