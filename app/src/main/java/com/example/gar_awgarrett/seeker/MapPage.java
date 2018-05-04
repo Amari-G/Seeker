@@ -1,5 +1,8 @@
 package com.example.gar_awgarrett.seeker;
 
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
@@ -14,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,9 +50,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     public TextView mInputDisplay;
     public String mInput;
 
-    private boolean inProximity;
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
+
+    private boolean inProximity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +63,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(" collected: ");
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(" collected: " + collectedCounter);
@@ -64,6 +72,20 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
+
+        // Check for location
+        // Alert user
+        if (gpsTracker.canGetLocation)
+        {
+            double latitude = mLocation.getLatitude();
+            double longitude = mLocation.getLongitude();
+
+            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+        }
+        else {
+            gpsTracker.showSettingsAlert();
+        }
+
 
         latitude = mLocation.getLatitude();
         longitude = mLocation.getLongitude();
@@ -225,7 +247,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         if (inProximity){
             EmeraldCollector emeraldCollector = new EmeraldCollector();
             emeraldCollector.show(fm, "Emerald Collector");
-            collectedCounter++;
+            /*collectedCounter++;
             TextView textView = (TextView) findViewById(R.id.textView);
             textView.setText(" collected: " + collectedCounter);
             Log.i("collectedCounter", "Size is " + collectedCounter);

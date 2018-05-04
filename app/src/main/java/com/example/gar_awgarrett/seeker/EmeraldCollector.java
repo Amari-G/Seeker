@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 public class EmeraldCollector extends DialogFragment {
 
     private static final String TAG = "EmeraldCollector";

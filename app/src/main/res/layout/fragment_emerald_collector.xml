@@ -22,6 +22,7 @@
         android:layout_marginTop="81dp"
         android:padding="?attr/dialogPreferredPadding"
         android:src="@drawable/emerald" />
-        android:text="@string/emerald_collector"
+    android:text="@string/emerald_collector"
 
 </RelativeLayout>
+

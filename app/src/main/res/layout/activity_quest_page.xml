@@ -17,7 +17,17 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-    <ImageButton
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        app:itemBackground="@android:color/darker_gray"
+        app:itemIconTint="@android:color/black"
+        app:menu="@menu/bottom_navigation_main"/>
+
+    <!--<ImageButton
         android:id="@+id/bNBMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +60,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/button_quest_page_description"
         android:src="@android:drawable/ic_menu_sort_by_size"
-        android:tint="@android:color/holo_green_light" />
+        android:tint="@android:color/holo_green_light" />-->
 
     <!--<ListView
         android:id="@+id/locationsList"
