@@ -21,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -67,12 +69,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        if (name.isEmpty()) {
-            editTextName.setError("Name is required");
-            editTextName.requestFocus();
-            return;
-        }
-
         if (email.isEmpty()) {
             editTextEmail.setError("Email is required");
             editTextEmail.requestFocus();
@@ -97,7 +93,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
+        if (name.isEmpty()) {
+            editTextName.setError("Name is required");
+            editTextName.requestFocus();
+            return;
+        }
+
         progressBar.setVisibility(View.VISIBLE);
+
+
+        //ArrayList<String> locations = new ArrayList<>();
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -108,9 +113,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     userRef = database.getReference("Users");
                     DatabaseReference newUserPath = userRef.push();
                     final String pathId = newUserPath.getKey();
+                    ArrayList<String> arrayList = new ArrayList<>();
 
                     //create a new user object
-                    User user = new User(email, name, 0, "");
+                    User user = new User(email, name, 0, arrayList);
 
                     //create a new child in the Users branch of the Firebase database
                     userRef.child(pathId).setValue(user);
@@ -174,6 +180,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
 
     }
+
+
 
     @Override
     public void onClick(View view) {
