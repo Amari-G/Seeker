@@ -17,9 +17,8 @@ import android.widget.TextView;
 public class EmeraldCollector extends DialogFragment {
 
     private static final String TAG = "EmeraldCollector";
-
     private EditText mInput;
-    private TextView mActionOk, mActionCancel;
+    private TextView mAcionOk, mActionCancel;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,11 +30,11 @@ public class EmeraldCollector extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         //do something else
                     }
-                })
-                .setNegativeButton("Skip", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+               // })
+                //.setNegativeButton("Skip", new DialogInterface.OnClickListener() {
+                   // public void onClick(DialogInterface dialog, int which) {
                         //do something else
-                    }
+                    //}
                 }).create();
     }
 }

@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -45,6 +46,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
     FragmentManager fm = getSupportFragmentManager();
+    int collectedCounter = 0;
+    public TextView mInputDisplay;
+    public String mInput;
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
@@ -61,6 +65,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map_page);
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(" collected: ");
+
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(" collected: " + collectedCounter);
+        Log.i("collectedCounter", "Size is " + collectedCounter);
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
@@ -105,6 +113,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 //startActivity(new Intent(MapPage.this, QuestActivity.class));
                 EmeraldCollector emeraldCollector = new EmeraldCollector();
                 emeraldCollector.show(fm, "Emerald Collector");
+                collectedCounter++;
+                TextView textView = (TextView) findViewById(R.id.textView);
+                textView.setText(" collected: " + collectedCounter);
+                Log.i("collectedCounter", "Size is " + collectedCounter);
             }
         });
     }
@@ -237,7 +249,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             emeraldCollector.show(fm, "Emerald Collector");
             /*collectedCounter++;
             TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText(" collected: " + collectedCounter);*/
+            textView.setText(" collected: " + collectedCounter);
+            Log.i("collectedCounter", "Size is " + collectedCounter);
         }
     }
 
