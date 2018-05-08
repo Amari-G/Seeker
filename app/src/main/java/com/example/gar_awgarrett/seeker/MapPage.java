@@ -74,8 +74,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         }
 
 
-       // latitude = mLocation.getLatitude();
-      //  longitude = mLocation.getLongitude();
+        latitude = mLocation.getLatitude();
+        longitude = mLocation.getLongitude();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -94,6 +94,16 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
         ImageButton bNBCam = findViewById(R.id.bNBCamera);
 
+        ImageButton chestButton = findViewById(R.id.imageButton2);
+
+        chestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //startActivity(new Intent(MapPage.this, QuestActivity.class));
+                ChestCollectionList collectionList = new ChestCollectionList();
+                collectionList.show(fm, "Collection List");
+            }
+        });
         bNBCam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
