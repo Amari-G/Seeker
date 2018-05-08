@@ -16,7 +16,9 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,9 +46,14 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
     FragmentManager fm = getSupportFragmentManager();
+    int collectedCounter = 0;
+    public TextView mInputDisplay;
+    public String mInput;
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
+
+    private boolean inProximity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +63,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(" collected: ");
+
+        TextView textView = (TextView) findViewById(R.id.textView);
+        textView.setText(" collected: " + collectedCounter);
+        Log.i("collectedCounter", "Size is " + collectedCounter);
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
@@ -110,6 +123,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 //startActivity(new Intent(MapPage.this, QuestActivity.class));
                 EmeraldCollector emeraldCollector = new EmeraldCollector();
                 emeraldCollector.show(fm, "Emerald Collector");
+                collectedCounter++;
+                TextView textView = (TextView) findViewById(R.id.textView);
+                textView.setText(" collected: " + collectedCounter);
+                Log.i("collectedCounter", "Size is " + collectedCounter);
             }
         });
     }
@@ -236,5 +253,26 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
         mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
+        checkInProximity(mLocations, latitude, longitude);
+        if (inProximity){
+            EmeraldCollector emeraldCollector = new EmeraldCollector();
+            emeraldCollector.show(fm, "Emerald Collector");
+            /*collectedCounter++;
+            TextView textView = (TextView) findViewById(R.id.textView);
+            textView.setText(" collected: " + collectedCounter);
+            Log.i("collectedCounter", "Size is " + collectedCounter);
+        }
+    }
+
+    public boolean checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
+
+        for(int i = 0; i <= mLocations.size() - 1; i++){
+            double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
+            if(distance <= 0.1){
+                inProximity = true;
+            }
+        }
+
+        return inProximity;
     }
 }

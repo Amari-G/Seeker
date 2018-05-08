@@ -83,18 +83,15 @@ public class QuestActivity extends AppCompatActivity {
         final ArrayAdapter<String>  questAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, mLocations);
 
-        mQuestList = findViewById(R.id.location_list);
+        mQuestList = findViewById(R.id.quest_list);
         mQuestList.setAdapter(questAdapter);
 
         mDatabase.child("Quests").addChildEventListener(new ChildEventListener(){
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                //Log.d(TAG, "onChildAdded:" + dataSnapshot.getKey());
-                //String value = dataSnapshot.getValue(String.class);
                 String name = dataSnapshot.child("name").getValue().toString();
                 mQuests.add(name);
                 questAdapter.notifyDataSetChanged();
-                //mTester.setText("Location: " + value);
             }
 
             @Override
@@ -121,16 +118,17 @@ public class QuestActivity extends AppCompatActivity {
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        /*
         //creates quest page button in navigation bar
         ImageButton bNBQuest = findViewById(R.id.bNBList);
 
-        /*
+
         //links quest page button to quest page
         bNBQuest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(QuestActivity.this, QuestActivity.class));
             }
-        });*/
+        });
 
         //creates map page button in navigation bar
         ImageButton bNBMap = findViewById(R.id.bNBMap);
@@ -154,32 +152,28 @@ public class QuestActivity extends AppCompatActivity {
             }
         });
     }
-    /*
+
     @Override
     public void startActivity(Intent intent) {
         super.startActivity(intent);
         onStartNewActivity();
     }
-
     @Override
     public void startActivity(Intent intent, Bundle options) {
         super.startActivity(intent, options);
         onStartNewActivity();
     }
-
     protected void onStartNewActivity() {
         overridePendingTransition(R.anim.slide_out_left, R.anim.slide_in_left);
     }
-
     @Override
     public void finish() {
         super.finish();
         onLeaveThisActivity();
     }
-
     protected void onLeaveThisActivity() {
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
-    }*/
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);*/
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

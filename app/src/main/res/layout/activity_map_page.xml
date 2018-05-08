@@ -8,6 +8,7 @@
     tools:layout="@layout/activity_map_page">
 
         <fragment
+            tools:ignore="ContentDescription"
             android:id="@+id/map"
             class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="fill_parent"

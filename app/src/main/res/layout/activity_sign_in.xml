@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
-            android:background="@color/green">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
+    android:background="@color/green">
 
     <ImageView
         tools:ignore="ContentDescription"
@@ -86,8 +86,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
-        app:srcCompat="@android:drawable/ic_menu_revert"
-        tools:ignore="ContentDescription" />
+        app:srcCompat="@android:drawable/ic_menu_revert"/>
 
     <TextView
         android:id="@+id/tvSignUp"
@@ -107,5 +106,4 @@
         android:layout_centerVertical="true"
         android:visibility="gone" />
 
-    </RelativeLayout>
-
+</RelativeLayout>

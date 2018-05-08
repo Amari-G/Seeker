@@ -7,9 +7,12 @@ import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,13 +20,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class CreateQuest extends AppCompatActivity {
 
+    private DatabaseReference mDatabase;
     private DatabaseReference rDatabase;
     private DataSnapshot sDatabase;
     //private String locationId1, locationId2, locationId3;
+    private AutoCompleteTextView actv1;
+    private AutoCompleteTextView actv2;
+    private AutoCompleteTextView actv3;
+    private ArrayList<String> mLocations = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +41,56 @@ public class CreateQuest extends AppCompatActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_create_quest);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
         rDatabase = FirebaseDatabase.getInstance().getReference().child("Quests");
+        actv1 = findViewById(R.id.newLocation1);
+        actv2 = findViewById(R.id.newLocation2);
+        actv3 = findViewById(R.id.newLocation3);
 
+        String[] language ={"a","b","c","Cortona Cafe","Ezell's Fried Chicken","Fremont Troll","Garfield High School","Golden Gardens Park","Space Needle","test","Tutta Bella","University of Washington","Woodland Park Zoo","ZERO ZERO"};
+
+        final ArrayAdapter<String> locationAdapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, language);
+        actv1.setAdapter(locationAdapter);
+        actv1.setThreshold(1);
+
+        actv2.setAdapter(locationAdapter);
+        actv2.setThreshold(1);
+
+        actv3.setAdapter(locationAdapter);
+        actv3.setThreshold(1);
 
         Button createQuest = findViewById(R.id.button_create_quest);
+
+        mDatabase.child("Emerald Locations").addChildEventListener(new ChildEventListener(){
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String name = dataSnapshot.child("name").getValue().toString();
+                mLocations.add(name);
+                locationAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         createQuest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -78,29 +134,22 @@ public class CreateQuest extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot){
                         Iterator i = dataSnapshot.getChildren().iterator();
-
                         while (i.hasNext()) {
                             locationId1 = (String) ((DataSnapshot) i.next()).getValue();
                             Log.i("Location Found:", locationId1);
                         }
-
                             //creates quest in database by generating a new path
                         //DatabaseReference newQuestPath = rDatabase.child("Quests").push();
-
                         //creates new string with value set as the quest's unique id
                         //String pathId = newQuestPath.getKey();
-
                         //creates location the location object with values created above
                         //Quest quest = new Quest(questName, locationName1, locationId1, locationName2, locationId2, locationName3, locationId3, pathId);
-
                         //adds location object to the path created on line 59
                         //rDatabase.child(pathId).setValue(quest);
-
                         //Restarts activity with empty fields
                         startActivity(new Intent(CreateQuest.this, CreateQuest.class));
                         finish();
                     }
-
                     @Override
                     public void onCancelled(DatabaseError e) {}
                 });*/
