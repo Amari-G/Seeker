@@ -150,7 +150,7 @@ public class QuestActivity extends AppCompatActivity {
                 finish();
                 startActivity(new Intent(QuestActivity.this, SavedQuestsActivity.class));
             }
-        });
+        });*/
     }
 
     @Override
@@ -172,7 +172,7 @@ public class QuestActivity extends AppCompatActivity {
         onLeaveThisActivity();
     }
     protected void onLeaveThisActivity() {
-        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);*/
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     @Override

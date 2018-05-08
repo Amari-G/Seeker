@@ -27,54 +27,6 @@
         app:itemIconTint="@android:color/black"
         app:menu="@menu/bottom_navigation_main"/>
 
-    <!--<ImageButton
-        android:id="@+id/bNBMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/bNBCamera"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/button_map_page_description"
-        android:src="@android:drawable/ic_dialog_map"
-        android:tint="@android:color/holo_green_light" />
-
-    <ImageButton
-        android:id="@+id/bNBCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="20dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/button_camera_page_description"
-        android:src="@android:drawable/ic_menu_camera"
-        android:tint="@android:color/holo_green_light" />
-
-    <ImageButton
-        android:id="@+id/bNBList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/bNBMap"
-        android:layout_marginEnd="20dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/button_quest_page_description"
-        android:src="@android:drawable/ic_menu_sort_by_size"
-        android:tint="@android:color/holo_green_light" />-->
-
-    <!--<ListView
-        android:id="@+id/locationsList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/my_toolbar"
-        android:divider="@color/colorPrimary"
-        android:dividerHeight="1dp"
-        android:footerDividersEnabled="false"
-        android:headerDividersEnabled="false"
-        android:scrollbars="vertical">
-    </ListView>-->
-
     <include
         layout="@layout/content_saved_quests"
         android:layout_height="wrap_content"

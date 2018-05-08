@@ -64,9 +64,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
         TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(" collected: ");
-
-        TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(" collected: " + collectedCounter);
         Log.i("collectedCounter", "Size is " + collectedCounter);
 
@@ -247,7 +244,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         if (inProximity){
             EmeraldCollector emeraldCollector = new EmeraldCollector();
             emeraldCollector.show(fm, "Emerald Collector");
-            /*collectedCounter++;
+            collectedCounter++;
             TextView textView = (TextView) findViewById(R.id.textView);
             textView.setText(" collected: " + collectedCounter);
             Log.i("collectedCounter", "Size is " + collectedCounter);
