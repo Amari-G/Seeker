@@ -66,7 +66,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(" collected: ");
 
-        TextView textView = (TextView) findViewById(R.id.textView);
+        //TextView textView = (TextView)findViewById(R.id.textView);
         textView.setText(" collected: " + collectedCounter);
         Log.i("collectedCounter", "Size is " + collectedCounter);
 
@@ -80,7 +80,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             double latitude = mLocation.getLatitude();
             double longitude = mLocation.getLongitude();
 
-            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Happy emerald hunting!", Toast.LENGTH_LONG).show();
         }
         else {
             gpsTracker.showSettingsAlert();
@@ -247,22 +248,24 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         if (inProximity){
             EmeraldCollector emeraldCollector = new EmeraldCollector();
             emeraldCollector.show(fm, "Emerald Collector");
-            /*collectedCounter++;
+            collectedCounter++;
             TextView textView = (TextView) findViewById(R.id.textView);
             textView.setText(" collected: " + collectedCounter);
-            Log.i("collectedCounter", "Size is " + collectedCounter);
+            Log.i("collectedCounter", "Size is: " + collectedCounter);
+            Log.i("inProximity", "Proximity location is: " + location.getName());
         }
     }
 
     public boolean checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
 
         for(int i = 0; i <= mLocations.size() - 1; i++){
-            double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
-            if(distance <= 0.1){
-                inProximity = true;
+            if (mLocations.get(i).getLatitude().intValue() != 0  && mLocations.get(i).getLongitude().intValue() != 0){
+                double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
+                if(distance <= 0.1){
+                    inProximity = true;
+                }
             }
         }
-
         return inProximity;
     }
 }
