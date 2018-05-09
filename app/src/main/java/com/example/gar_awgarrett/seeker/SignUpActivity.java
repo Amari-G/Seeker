@@ -21,6 +21,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -165,7 +169,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     });
 
                     finish();
-                    startActivity(new Intent(SignUpActivity.this, MapPage.class));
+                     startActivity(new Intent(SignUpActivity.this, MapPage.class));
                 } else {
 
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
@@ -180,8 +184,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         });
 
     }
-
-
 
     @Override
     public void onClick(View view) {
