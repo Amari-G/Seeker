@@ -2,12 +2,18 @@ package com.example.gar_awgarrett.seeker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -48,6 +54,42 @@ public class QuestActivity extends AppCompatActivity {
         final ArrayAdapter<String>  locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
         mLocationList.setAdapter(locationAdapter);
 
+        BottomNavigationView navView = findViewById(R.id.bottom_navigation_view);
+        navView.setItemTextColor(AppCompatResources.getColorStateList(this, R.color.nav_bar_anim));
+        BottomNavigationViewHelper.disableShiftMode(navView);
+
+        /*for (int i = 0; i < navView.getChildCount(); i++) {
+            final View iconView = navView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+            final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+            iconView.setLayoutParams(layoutParams);
+        }*/
+
+
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bNBCamera:
+                        Intent cam = new Intent(getApplicationContext(), MapPage.class);
+                        startActivity(cam);
+                        break;
+                    case R.id.bNBMap:
+                        //go to map page
+                        Intent map = new Intent(getApplicationContext(), MapPage.class);
+                        startActivity(map);
+                        break;
+                    case R.id.bNBQuests:
+                        //go to quest page
+                    default:
+                        return QuestActivity.super.onOptionsItemSelected(item);
+                }
+                return true;
+            }
+        });
+
         mDatabase.child("Emerald Locations").addChildEventListener(new ChildEventListener(){
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -81,7 +123,7 @@ public class QuestActivity extends AppCompatActivity {
         });
 
         final ArrayAdapter<String>  questAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, mLocations);
+                android.R.layout.simple_list_item_1, mQuests);
 
         mQuestList = findViewById(R.id.quest_list);
         mQuestList.setAdapter(questAdapter);
@@ -117,40 +159,6 @@ public class QuestActivity extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-        /*
-        //creates quest page button in navigation bar
-        ImageButton bNBQuest = findViewById(R.id.bNBList);
-
-
-        //links quest page button to quest page
-        bNBQuest.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(QuestActivity.this, QuestActivity.class));
-            }
-        });
-
-        //creates map page button in navigation bar
-        ImageButton bNBMap = findViewById(R.id.bNBMap);
-
-        //links map button to map page
-        bNBMap.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(QuestActivity.this, MapPage.class));
-            }
-        });
-
-        //creates a camera button in navigation bar
-        ImageButton bNBCamera = findViewById(R.id.bNBCamera);
-
-        //links camera button to camera page
-        bNBCamera.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                finish();
-                startActivity(new Intent(QuestActivity.this, SavedQuestsActivity.class));
-            }
-        });*/
     }
 
     @Override

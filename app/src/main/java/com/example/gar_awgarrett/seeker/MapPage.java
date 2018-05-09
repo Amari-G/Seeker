@@ -77,7 +77,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             double latitude = mLocation.getLatitude();
             double longitude = mLocation.getLongitude();
 
-            Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Your Location : \nLatitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
         }
         else {
             gpsTracker.showSettingsAlert();
