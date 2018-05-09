@@ -64,10 +64,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
         setContentView(R.layout.activity_map_page);
         TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(" collected: ");
+        textView.setText(" x ");
 
         //TextView textView = (TextView)findViewById(R.id.textView);
-        textView.setText(" collected: " + collectedCounter);
+        textView.setText(" x " + collectedCounter);
         Log.i("collectedCounter", "Size is " + collectedCounter);
 
         gpsTracker = new GPSTracker(getApplicationContext());
@@ -126,7 +126,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 emeraldCollector.show(fm, "Emerald Collector");
                 collectedCounter++;
                 TextView textView = (TextView) findViewById(R.id.textView);
-                textView.setText(" collected: " + collectedCounter);
+                textView.setText(" x " + collectedCounter);
                 Log.i("collectedCounter", "Size is " + collectedCounter);
             }
         });
@@ -260,7 +260,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             emeraldCollector.show(fm, "Emerald Collector");
             collectedCounter++;
             TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText(" collected: " + collectedCounter);
+            textView.setText(" x " + collectedCounter);
             Log.i("collectedCounter", "Size is: " + collectedCounter);
             Log.i("inProximity", "Proximity location is: " + location.getName());
         }
