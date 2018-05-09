@@ -169,7 +169,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     });
 
                     finish();
-                    startActivity(new Intent(SignUpActivity.this, MapPage.class));
+                     startActivity(new Intent(SignUpActivity.this, MapPage.class));
                 } else {
 
                     if (task.getException() instanceof FirebaseAuthUserCollisionException) {
