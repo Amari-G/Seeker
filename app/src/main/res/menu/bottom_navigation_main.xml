@@ -7,10 +7,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/darker_gray"
         android:contentDescription="@string/button_camera_page_description"
-        android:icon="@android:drawable/ic_menu_camera"
-        android:tint="@android:color/black" />
+        android:icon="@android:drawable/ic_menu_camera" />
 
     <item
         android:id="@+id/bNBMap"
@@ -18,10 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/bNBCamera"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/darker_gray"
         android:contentDescription="@string/button_map_page_description"
-        android:icon="@android:drawable/ic_dialog_map"
-        android:tint="@android:color/black" />
+        android:icon="@android:drawable/ic_dialog_map" />
 
     <item
         android:id="@+id/bNBQuests"
@@ -30,8 +26,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/bNBMap"
         android:layout_marginEnd="20dp"
-        android:background="@android:color/darker_gray"
         android:contentDescription="@string/button_quest_page_description"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:tint="@android:color/black" />
+        android:icon="@android:drawable/ic_menu_sort_by_size" />
 </menu>

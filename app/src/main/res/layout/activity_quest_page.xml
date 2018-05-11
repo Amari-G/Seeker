@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="@color/emerald_tracker_background"
+        android:background="@color/translucent_grey"
         app:itemIconTint="@android:color/black"
         app:menu="@menu/bottom_navigation_main" />
 

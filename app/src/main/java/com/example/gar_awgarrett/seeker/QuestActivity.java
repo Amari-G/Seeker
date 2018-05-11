@@ -3,11 +3,13 @@ package com.example.gar_awgarrett.seeker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,21 +53,26 @@ public class QuestActivity extends AppCompatActivity {
         mLocationList = findViewById(R.id.location_list);
         //mTester = (TextView)findViewById(R.id.location);
 
-        final ArrayAdapter<String>  locationAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mLocations);
+        final ArrayAdapter<String>  locationAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_list_item_1, mLocations);
         mLocationList.setAdapter(locationAdapter);
 
         BottomNavigationView navView = findViewById(R.id.bottom_navigation_view);
-        navView.setItemTextColor(AppCompatResources.getColorStateList(this, R.color.nav_bar_anim));
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) navView.getChildAt(0);
+        navView.setItemTextColor(AppCompatResources.getColorStateList
+                (this, R.color.nav_bar_anim));
         BottomNavigationViewHelper.disableShiftMode(navView);
 
-        /*for (int i = 0; i < navView.getChildCount(); i++) {
-            final View iconView = navView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+        for (int i = 0; i < menuView.getChildCount(); i++) {
+            Log.i("Navigation Item Count: ", String.valueOf(menuView.getChildCount()));
+            Log.i("Navigation Item Index: ", String.valueOf(i));
+            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
             final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
             layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
             iconView.setLayoutParams(layoutParams);
-        }*/
+        }
 
 
         navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
