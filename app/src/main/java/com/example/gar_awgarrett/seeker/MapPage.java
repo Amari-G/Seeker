@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.content.res.AppCompatResources;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -88,7 +89,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             double longitude = mLocation.getLongitude();
 
             //Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), "Happy emerald hunting!", Toast.LENGTH_LONG).show();
+            Toast greeting = Toast.makeText(getApplicationContext(),
+                    "Happy emerald hunting!", Toast.LENGTH_LONG);
+            greeting.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,
+                    0, 200);
+            greeting.show();
+
         }
         else {
             gpsTracker.showSettingsAlert();
