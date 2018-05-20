@@ -7,4 +7,5 @@
     <color name="colorButton">#69F0AE</color>
     <color name="colorNavButton">#FFFFFF</color>
     <color name="emerald_tracker_background">#e6bbbbbb</color>
+    <color name="translucent_grey">#90D3D3D3</color>
 </resources>
