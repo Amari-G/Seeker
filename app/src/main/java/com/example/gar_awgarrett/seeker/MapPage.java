@@ -1,8 +1,16 @@
 package com.example.gar_awgarrett.seeker;
 
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationMenuView;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.content.res.AppCompatResources;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.content.Intent;
 import android.graphics.Color;
@@ -101,7 +109,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             double longitude = mLocation.getLongitude();
 
             //Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
-            Toast.makeText(getApplicationContext(), "Happy emerald hunting " + Name + "!", Toast.LENGTH_LONG).show();
+            Toast greeting = Toast.makeText(getApplicationContext(),
+                    "Happy emerald hunting " + Name + "!", Toast.LENGTH_LONG);
+            greeting.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,
+                    0, 200);
+            greeting.show();
+
         }
         else {
             gpsTracker.showSettingsAlert();
@@ -116,18 +129,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        ImageButton bNBQuest = findViewById(R.id.bNBList);
-
-        bNBQuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MapPage.this, QuestActivity.class));
-                //writeAndReadFromDatabase();
-            }
-        });
-
-        ImageButton bNBCam = findViewById(R.id.bNBCamera);
-
         ImageButton chestButton = findViewById(R.id.imageButton2);
 
         chestButton.setOnClickListener(new View.OnClickListener() {
@@ -138,16 +139,50 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 collectionList.show(fm, "Collection List");
             }
         });
-        bNBCam.setOnClickListener(new View.OnClickListener() {
+
+        BottomNavigationView navView = findViewById(R.id.bottom_navigation_view);
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) navView.getChildAt(0);
+        navView.setItemTextColor(AppCompatResources.getColorStateList
+                (this, R.color.nav_bar_anim));
+        BottomNavigationViewHelper.disableShiftMode(navView);
+
+        for (int i = 0; i < menuView.getChildCount(); i++) {
+            Log.i("Navigation Item Count: ", String.valueOf(menuView.getChildCount()));
+            Log.i("Navigation Item Index: ", String.valueOf(i));
+            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+            final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 32, displayMetrics);
+            iconView.setLayoutParams(layoutParams);
+        }
+
+
+        navView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                //startActivity(new Intent(MapPage.this, QuestActivity.class));
-                EmeraldCollector emeraldCollector = new EmeraldCollector();
-                emeraldCollector.show(fm, "Emerald Collector");
-                collectedCounter++;
-                TextView textView = (TextView) findViewById(R.id.textView);
-                textView.setText(" x " + collectedCounter);
-                Log.i("collectedCounter", "Size is " + collectedCounter);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.bNBCamera:
+                        //startActivity(new Intent(MapPage.this, QuestActivity.class));
+                        EmeraldCollector emeraldCollector = new EmeraldCollector();
+                        emeraldCollector.show(fm, "Emerald Collector");
+                        collectedCounter++;
+                        TextView textView = (TextView) findViewById(R.id.textView);
+                        textView.setText(" x " + collectedCounter);
+                        Log.i("collectedCounter", "Size is " + collectedCounter);
+                        break;
+                    case R.id.bNBMap:
+                        //do nothing
+                        break;
+                    case R.id.bNBQuests:
+                        //go to quest page
+                        Intent quest = new Intent(getApplicationContext(), QuestActivity.class);
+                        startActivity(quest);
+                        break;
+                    default:
+                        return MapPage.super.onOptionsItemSelected(item);
+                }
+                return true;
             }
         });
     }

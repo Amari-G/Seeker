@@ -23,17 +23,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class CreateQuest extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private DatabaseReference rDatabase;
     private DataSnapshot sDatabase;
-    //private String locationId1, locationId2, locationId3;
+
+    private ArrayList<String> mLocations = new ArrayList<>();
+
     private AutoCompleteTextView actv1;
     private AutoCompleteTextView actv2;
     private AutoCompleteTextView actv3;
-    private ArrayList<String> mLocations = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +45,14 @@ public class CreateQuest extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
         rDatabase = FirebaseDatabase.getInstance().getReference().child("Quests");
+
         actv1 = findViewById(R.id.newLocation1);
         actv2 = findViewById(R.id.newLocation2);
         actv3 = findViewById(R.id.newLocation3);
 
-        String[] language ={"a","b","c","Cortona Cafe","Ezell's Fried Chicken","Fremont Troll","Garfield High School","Golden Gardens Park","Space Needle","test","Tutta Bella","University of Washington","Woodland Park Zoo","ZERO ZERO"};
+        final ArrayAdapter locationAdapter = new ArrayAdapter<>
+                (this, android.R.layout.simple_list_item_1, mLocations);
 
-        final ArrayAdapter<String> locationAdapter = new ArrayAdapter<>
-                (this, android.R.layout.simple_list_item_1, language);
         actv1.setAdapter(locationAdapter);
         actv1.setThreshold(1);
 
@@ -62,12 +64,13 @@ public class CreateQuest extends AppCompatActivity {
 
         Button createQuest = findViewById(R.id.button_create_quest);
 
-        mDatabase.child("Emerald Locations").addChildEventListener(new ChildEventListener(){
+        mDatabase.addChildEventListener(new ChildEventListener(){
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String name = dataSnapshot.child("name").getValue().toString();
                 mLocations.add(name);
                 locationAdapter.notifyDataSetChanged();
+                Log.i("List Locations", mLocations.toString());
             }
 
             @Override
