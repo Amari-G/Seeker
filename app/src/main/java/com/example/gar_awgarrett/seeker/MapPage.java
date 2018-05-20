@@ -88,8 +88,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map_page);
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(" x ");
-
-        //TextView textView = (TextView)findViewById(R.id.textView);
+        
         textView.setText(" x " + collectedCounter);
         Log.i("collectedCounter", "Size is " + collectedCounter);
 
