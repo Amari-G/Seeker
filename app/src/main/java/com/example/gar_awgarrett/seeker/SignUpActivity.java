@@ -48,10 +48,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private DatabaseReference userRef;
     private DatabaseReference collectedRef;
 
-    public static final String MyPREFERENCES = "MyPrefs";
-    public static final String Name = "nameKey";
-    public static final String Email = "emailKey";
-
     SharedPreferences sharedPreferences;
 
     @Override

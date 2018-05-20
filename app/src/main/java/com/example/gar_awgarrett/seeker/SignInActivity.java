@@ -23,10 +23,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     EditText editTextEmail, editTextPassword, editTextName;
     ProgressBar progressBar;
 
-    public static final String MyPREFERENCES = "MyPrefs";
-    public static final String Name = "nameKey";
-    public static final String Email = "emailKey";
-
     SharedPreferences sharedPreferences;
 
     @Override
