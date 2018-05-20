@@ -187,21 +187,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     **/
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    Gson gson = new Gson();
-                    String json = gson.toJson(arrayList);
-                    editor.putString("location list", json);
-                    editor.apply();
-
-                    //Retrieve the values
-                    /*Set<String> set = arrayList.getStringSet("key", null);
-
-                    //Set the values
-                    Set<String> set = new HashSet<String>();
-                    set.addAll(listOfExistingScores);
-                    scoreEditor.putStringSet("key", set);
-                    scoreEditor.commit();
-                    **/
-
                     editor.putString("Name", name);
                     editor.putString("Email", email);
                     editor.commit();

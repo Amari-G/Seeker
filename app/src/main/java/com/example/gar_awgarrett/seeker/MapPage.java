@@ -44,7 +44,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-//import com.google.gson.Gson;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -88,7 +87,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map_page);
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(" x ");
-        
+
         textView.setText(" x " + collectedCounter);
         Log.i("collectedCounter", "Size is " + collectedCounter);
 
@@ -237,43 +236,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         displayLocation(mMap, spaceNeedleLocation);
         */
 
-        /*
-        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        //mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child("-LBMRM19FzNYwDVpzh6B");
-        mUserDatabase.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String id = dataSnapshot.getKey();
-                String name = dataSnapshot.child("name").getValue().toString();
-                String email = dataSnapshot.child("email").getValue().toString();
-                if (email.equals(Email)) {
-                    currentUserId = id;
-                    Log.i("mUserDatabase", "Email is: " + email);
-                    mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-        **/
 
         //Retrieve emerald locations from Firebase database and automatically display them on the map
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
@@ -312,16 +274,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
             }
         });
-
-        Gson gson = new Gson();
-        String json = sharedPreferences.getString("location list", null);
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
-        locationList = gson.fromJson(json, type);
-        if (locationList == null) {
-            locationList = new ArrayList<>();
-        }
-        int size = locationList.size();
-        Log.i("locationList", "Size is: " + String.valueOf(size));
     }
 
     //This sample code and testing message shows an example of how to read and write from the database
@@ -338,7 +290,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 String value = dataSnapshot.getValue(String.class);
-                //Log.d("Amy", "Value is: " + value);
             }
 
             @Override
@@ -365,8 +316,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             textView.setText(" x " + collectedCounter);
             Log.i("collectedCounter", "Size is: " + collectedCounter);
             Log.i("inProximity", "Proximity location is: " + location.getName());
-            //mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child("-LBMRM19FzNYwDVpzh6B");
-            //getCurrentUserBranch();
             if (mUserBranch != null) {
                 collectedRef = mUserBranch.child("collectedLocations");
                 DatabaseReference newCollectedLocationPath = mUserBranch.push();
@@ -390,6 +339,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         return proximityLocation;
     }
 
+    //this is called in the onCreate method
+    //this method matches mUserBranch to the current user branch in the database, based on the email passed from SignUpActivity
     public void getCurrentUserBranch(){
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
         //mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child("-LBMRM19FzNYwDVpzh6B");
