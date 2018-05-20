@@ -1,5 +1,6 @@
 package com.example.gar_awgarrett.seeker;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
@@ -41,8 +42,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 //import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -57,11 +61,22 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     int collectedCounter = 0;
     public TextView mInputDisplay;
     public String mInput;
+    private String Name;
+    private String Email;
+    public String currentUserId;
+
+    SharedPreferences sharedPreferences;
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
+    private ArrayList<String> locationList = new ArrayList<>();
+
+    private DatabaseReference mUserDatabase;
+    private DatabaseReference mUserBranch;
+    private DatabaseReference collectedRef;
 
     private boolean inProximity = false;
+    private com.example.gar_awgarrett.seeker.Location proximityLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +88,14 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         setContentView(R.layout.activity_map_page);
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(" x ");
-
-        //TextView textView = (TextView)findViewById(R.id.textView);
+        
         textView.setText(" x " + collectedCounter);
         Log.i("collectedCounter", "Size is " + collectedCounter);
+
+        sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
+        Name = sharedPreferences.getString("Name", null);
+        Email = sharedPreferences.getString("Email", null);
+        getCurrentUserBranch();
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
@@ -90,7 +109,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
             //Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
             Toast greeting = Toast.makeText(getApplicationContext(),
-                    "Happy emerald hunting!", Toast.LENGTH_LONG);
+                    "Happy emerald hunting " + Name + "!", Toast.LENGTH_LONG);
             greeting.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,
                     0, 200);
             greeting.show();
@@ -218,6 +237,44 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         displayLocation(mMap, spaceNeedleLocation);
         */
 
+        /*
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        //mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child("-LBMRM19FzNYwDVpzh6B");
+        mUserDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String id = dataSnapshot.getKey();
+                String name = dataSnapshot.child("name").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                if (email.equals(Email)) {
+                    currentUserId = id;
+                    Log.i("mUserDatabase", "Email is: " + email);
+                    mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        **/
+
         //Retrieve emerald locations from Firebase database and automatically display them on the map
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Emerald Locations");
         ChildEventListener childEventListener = mDatabase.addChildEventListener(new ChildEventListener() {
@@ -255,6 +312,16 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
             }
         });
+
+        Gson gson = new Gson();
+        String json = sharedPreferences.getString("location list", null);
+        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        locationList = gson.fromJson(json, type);
+        if (locationList == null) {
+            locationList = new ArrayList<>();
+        }
+        int size = locationList.size();
+        Log.i("locationList", "Size is: " + String.valueOf(size));
     }
 
     //This sample code and testing message shows an example of how to read and write from the database
@@ -298,19 +365,66 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             textView.setText(" x " + collectedCounter);
             Log.i("collectedCounter", "Size is: " + collectedCounter);
             Log.i("inProximity", "Proximity location is: " + location.getName());
+            //mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child("-LBMRM19FzNYwDVpzh6B");
+            //getCurrentUserBranch();
+            if (mUserBranch != null) {
+                collectedRef = mUserBranch.child("collectedLocations");
+                DatabaseReference newCollectedLocationPath = mUserBranch.push();
+                final String pathId = newCollectedLocationPath.getKey();
+                collectedRef.child(pathId).setValue(location.getId());
+            }
         }
     }
 
-    public boolean checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
+    public com.example.gar_awgarrett.seeker.Location checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
 
         for(int i = 0; i <= mLocations.size() - 1; i++){
             if (mLocations.get(i).getLatitude().intValue() != 0  && mLocations.get(i).getLongitude().intValue() != 0){
                 double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
                 if(distance <= 0.1){
                     inProximity = true;
+                    proximityLocation = mLocations.get(i);
                 }
             }
         }
-        return inProximity;
+        return proximityLocation;
+    }
+
+    public void getCurrentUserBranch(){
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        //mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child("-LBMRM19FzNYwDVpzh6B");
+        mUserDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String id = dataSnapshot.getKey();
+                String name = dataSnapshot.child("name").getValue().toString();
+                String email = dataSnapshot.child("email").getValue().toString();
+                if (email.equals(Email)) {
+                    currentUserId = id;
+                    Log.i("mUserDatabase", "Email is: " + email);
+                    mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

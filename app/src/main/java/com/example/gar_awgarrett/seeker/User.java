@@ -11,12 +11,20 @@ public class User {
     private String name;
     private int collected;
     private ArrayList<String> collectedLocations;
+    private String collectedPlaces;
 
     public User(String email, String name, int collected, ArrayList<String> collectedLocations) {
         this.email = email;
         this.name = name;
         this.collected = collected;
         this.collectedLocations = collectedLocations;
+    }
+
+    public User(String email, String name, int collected, String collectedPlaces) {
+        this.email = email;
+        this.name = name;
+        this.collected = collected;
+        this.collectedPlaces = collectedPlaces;
     }
 
     public String getEmail() {
