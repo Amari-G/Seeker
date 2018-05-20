@@ -1,6 +1,7 @@
 package com.example.gar_awgarrett.seeker;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,12 +23,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     EditText editTextEmail, editTextPassword, editTextName;
     ProgressBar progressBar;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
         mAuth = FirebaseAuth.getInstance();
+
+        sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
 
         editTextEmail = findViewById(R.id.etSIEmail);
         editTextPassword = findViewById(R.id.etSIPassword);
@@ -46,7 +51,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void userLogin() {
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
@@ -80,6 +85,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             public void onComplete(@NonNull Task<AuthResult> task) {
                 progressBar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("Email", email);
+                    editor.commit();
+
                     finish();
                     Intent intent = new Intent(SignInActivity.this, MapPage.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

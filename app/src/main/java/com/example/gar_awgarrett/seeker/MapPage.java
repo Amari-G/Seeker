@@ -92,7 +92,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         Log.i("collectedCounter", "Size is " + collectedCounter);
 
         sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
-        Name = sharedPreferences.getString("Name", null);
+        //Name = sharedPreferences.getString("Name", null);
         Email = sharedPreferences.getString("Email", null);
         getCurrentUserBranch();
 
@@ -108,7 +108,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
             //Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
             Toast greeting = Toast.makeText(getApplicationContext(),
-                    "Happy emerald hunting " + Name + "!", Toast.LENGTH_LONG);
+                    "Happy emerald hunting!", Toast.LENGTH_LONG);
             greeting.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,
                     0, 200);
             greeting.show();
