@@ -3,6 +3,7 @@ package com.example.gar_awgarrett.seeker;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,8 +32,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -43,6 +47,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private DatabaseReference userRef;
     private DatabaseReference collectedRef;
+
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String Name = "nameKey";
+    public static final String Email = "emailKey";
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +65,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         progressBar = findViewById(R.id.progressbar);
 
         mAuth = FirebaseAuth.getInstance();
+
+        sharedPreferences = getSharedPreferences("user_details", MODE_PRIVATE);
 
         findViewById(R.id.bSUSignUp).setOnClickListener(this);
         findViewById(R.id.tvSignIn).setOnClickListener(this);
@@ -117,13 +129,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     userRef = database.getReference("Users");
                     DatabaseReference newUserPath = userRef.push();
                     final String pathId = newUserPath.getKey();
-                    ArrayList<String> arrayList = new ArrayList<>();
+                    final ArrayList<String> arrayList = new ArrayList<>();
 
                     //create a new user object
-                    User user = new User(email, name, 0, arrayList);
+                    //User user = new User(email, name, 0, arrayList);
+                    User user = new User(email, name, 0, "collectedLocations");
 
                     //create a new child in the Users branch of the Firebase database
                     userRef.child(pathId).setValue(user);
+
+                    /*
                     collectedRef = FirebaseDatabase.getInstance().getReference().child("Users").child(pathId).child("collectedLocations");
                     //DatabaseReference newUserLocationPath = collectedRef.push();
                     //String locationPathId = newUserLocationPath.getKey();
@@ -136,11 +151,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                             //DatabaseReference newUserLocationPath = collectedRef.push();
                             String id = dataSnapshot.getKey();
                             collectedRef.child(id).setValue("false");
+                            arrayList.add(id);
+                            int size = arrayList.size();
+                            Log.i("arrayList", "Size is: " + String.valueOf(size));
+                            Log.i("arrayList", "Next element is: " + String.valueOf(id));
                             //locations.add(id);
                             //locations.add(id);
                             //next two lines keeps track of mLocations size for testing
-                            //int size = locations.size();
-                            //Log.i("mLocations", "Size is: " + String.valueOf(size));
 
 
                             //for (String location : locations){
@@ -167,6 +184,28 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                         }
                     });
+                    **/
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    Gson gson = new Gson();
+                    String json = gson.toJson(arrayList);
+                    editor.putString("location list", json);
+                    editor.apply();
+
+                    //Retrieve the values
+                    /*Set<String> set = arrayList.getStringSet("key", null);
+
+                    //Set the values
+                    Set<String> set = new HashSet<String>();
+                    set.addAll(listOfExistingScores);
+                    scoreEditor.putStringSet("key", set);
+                    scoreEditor.commit();
+                    **/
+
+                    editor.putString("Name", name);
+                    editor.putString("Email", email);
+                    editor.commit();
+
 
                     finish();
                      startActivity(new Intent(SignUpActivity.this, MapPage.class));
