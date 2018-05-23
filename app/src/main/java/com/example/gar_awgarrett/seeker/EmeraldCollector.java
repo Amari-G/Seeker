@@ -22,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
 import static android.content.Context.MODE_PRIVATE;
 
 public class EmeraldCollector extends DialogFragment {
@@ -34,6 +36,7 @@ public class EmeraldCollector extends DialogFragment {
     private String Name;
     private String Email;
     private String Location;
+    private int numberCollected;
     private DatabaseReference mUserDatabase;
     private DatabaseReference mUserBranch;
     public String currentUserId;
@@ -44,11 +47,12 @@ public class EmeraldCollector extends DialogFragment {
         Name = sharedPreferences.getString("Name", null);
         Email = sharedPreferences.getString("Email", null);
         sharedPreferencesLocation = getActivity().getSharedPreferences("location_details", MODE_PRIVATE);
-        Location = sharedPreferencesLocation.getString("Location", null);
+        numberCollected = sharedPreferences.getInt("Number Collected", 0);
+        Location = sharedPreferencesLocation.getString("Location" + numberCollected, null);
         Log.i("Location", "Value is: " + Location);
 
-        return new AlertDialog.Builder(getActivity())
-                .setIcon(R.drawable.emerald)
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setIcon(R.drawable.emerald)
                 .setTitle("You found an emerald!")
                 .setMessage("           " + Location)
                 .setPositiveButton("Collect", new DialogInterface.OnClickListener() {
@@ -60,7 +64,8 @@ public class EmeraldCollector extends DialogFragment {
                    // public void onClick(DialogInterface dialog, int which) {
                         //do something else
                     //}
-                }).create();
+                });
+        return builder.create();
     }
 
     public void getCurrentUserBranch(){

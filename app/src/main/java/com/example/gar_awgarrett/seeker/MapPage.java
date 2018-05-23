@@ -61,6 +61,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private String Name;
     private String Email;
     public String currentUserId;
+    private int numberCollected = 0;
 
     SharedPreferences sharedPreferences;
     SharedPreferences sharedPreferencesLocation;
@@ -166,9 +167,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 switch (item.getItemId()) {
                     case R.id.bNBCamera:
                         //startActivity(new Intent(MapPage.this, QuestActivity.class));
-                        EmeraldCollector emeraldCollector = new EmeraldCollector();
-                        emeraldCollector.show(fm, "Emerald Collector");
-                        collectedCounter = collectedLocationList.size();
+                        //EmeraldCollector emeraldCollector = new EmeraldCollector();
+                        //emeraldCollector.show(fm, "Emerald Collector");
+                        //collectedCounter = collectedLocationList.size();
                         //collectedCounter++;
                         TextView textView = (TextView) findViewById(R.id.textView);
                         textView.setText(" x " + collectedCounter);
@@ -323,8 +324,15 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         if (collected == false) {
             mLocations.add(location);
             mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker).icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
-            checkInProximity(mLocations, latitude, longitude);
+            inProximity = false;
+            checkInProximity(location, latitude, longitude);
             if (inProximity) {
+                numberCollected++;
+                SharedPreferences.Editor locationEditor = sharedPreferencesLocation.edit();
+                locationEditor.putInt("Number Collected", numberCollected);
+                locationEditor.putString("Location" + numberCollected, location.getName());
+                locationEditor.commit();
+                Log.i("Location" + numberCollected, location.getName());
                 EmeraldCollector emeraldCollector = new EmeraldCollector();
                 emeraldCollector.show(fm, "Emerald Collector");
                 collectedCounter = collectedLocationList.size();
@@ -334,10 +342,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 //proximityLocationList.add(location);
                 Log.i("collectedCounter", "Size is: " + collectedCounter);
                 Log.i("inProximity", "Proximity location is: " + location.getName());
-                SharedPreferences.Editor locationEditor = sharedPreferencesLocation.edit();
-                locationEditor.putString("Location", location.getName());
-                locationEditor.putInt("Counter", collectedCounter);
-                locationEditor.commit();
                 if (mUserBranch != null) {
                     collectedRef = mUserBranch.child("collectedLocations");
                     collectedRef.child(location.getId()).setValue(location.getName());
@@ -346,15 +350,15 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         }
     }
 
-    public com.example.gar_awgarrett.seeker.Location checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
+    public com.example.gar_awgarrett.seeker.Location checkInProximity(com.example.gar_awgarrett.seeker.Location location, double latitude, double longitude){
 
-        for(int i = 0; i <= mLocations.size() - 1; i++){
-            if (mLocations.get(i).getLatitude().intValue() != 0  && mLocations.get(i).getLongitude().intValue() != 0){
-                double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
-                if(distance <= 0.1){
-                    inProximity = true;
-                    proximityLocation = mLocations.get(i);
-                }
+
+        if (location.getLatitude().intValue() != 0  && location.getLongitude().intValue() != 0){
+            double distance = distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0);
+            if(distance <= 0.1){
+                Log.i("distance is: ", distance + " mi");
+                inProximity = true;
+                proximityLocation = location;
             }
         }
         return proximityLocation;
@@ -384,13 +388,9 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                             collectedLocationList.add(location);
                             collectedLocationNameList.add(locationName);
                             collectedCounter = collectedLocationList.size();
-                            //EmeraldCollector emeraldCollector = new EmeraldCollector();
-                            //emeraldCollector.show(fm, "Emerald Collector");
                             TextView textView = (TextView) findViewById(R.id.textView);
                             textView.setText(" x " + collectedCounter);
-                            //proximityLocationList.add(location);
                             Log.i("collectedCounter", "Size is: " + collectedCounter);
-                            //Log.i("inProximity", "Proximity location is: " + location.getName());
                             SharedPreferences.Editor locationEditor = sharedPreferencesLocation.edit();
                             locationEditor.putInt("Counter", collectedCounter);
                             Set<String> set = new HashSet<String>();
