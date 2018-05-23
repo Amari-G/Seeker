@@ -42,8 +42,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.math.BigDecimal;
@@ -69,10 +67,12 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
     private ArrayList<String> locationList = new ArrayList<>();
+    private ArrayList<String> collectedLocationList = new ArrayList<>();
 
     private DatabaseReference mUserDatabase;
     private DatabaseReference mUserBranch;
     private DatabaseReference collectedRef;
+    private DatabaseReference mUserLocations;
 
     private boolean inProximity = false;
     private com.example.gar_awgarrett.seeker.Location proximityLocation;
@@ -95,6 +95,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         //Name = sharedPreferences.getString("Name", null);
         Email = sharedPreferences.getString("Email", null);
         getCurrentUserBranch();
+        //getCurrentUserData();
 
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
@@ -306,21 +307,32 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         String distanceToMarker = String.valueOf(MapPage.distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0)) + " mi";
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
-        mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
-        checkInProximity(mLocations, latitude, longitude);
-        if (inProximity){
-            EmeraldCollector emeraldCollector = new EmeraldCollector();
-            emeraldCollector.show(fm, "Emerald Collector");
-            collectedCounter++;
-            TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText(" x " + collectedCounter);
-            Log.i("collectedCounter", "Size is: " + collectedCounter);
-            Log.i("inProximity", "Proximity location is: " + location.getName());
-            if (mUserBranch != null) {
-                collectedRef = mUserBranch.child("collectedLocations");
-                DatabaseReference newCollectedLocationPath = mUserBranch.push();
-                final String pathId = newCollectedLocationPath.getKey();
-                collectedRef.child(pathId).setValue(location.getId());
+        String id = location.getId();
+        Log.i("location", "Id is: " + id);
+        boolean collected = false;
+        for (String loc : collectedLocationList){
+            if (loc.equals(id)){
+                collected = true;
+                Log.i("collectedLocation", "Id is: " + id);
+            }
+        }
+        if (collected == false) {
+            mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker).icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
+            checkInProximity(mLocations, latitude, longitude);
+            if (inProximity) {
+                EmeraldCollector emeraldCollector = new EmeraldCollector();
+                emeraldCollector.show(fm, "Emerald Collector");
+                collectedCounter++;
+                TextView textView = (TextView) findViewById(R.id.textView);
+                textView.setText(" x " + collectedCounter);
+                Log.i("collectedCounter", "Size is: " + collectedCounter);
+                Log.i("inProximity", "Proximity location is: " + location.getName());
+                if (mUserBranch != null) {
+                    collectedRef = mUserBranch.child("collectedLocations");
+                    DatabaseReference newCollectedLocationPath = mUserBranch.push();
+                    final String pathId = newCollectedLocationPath.getKey();
+                    collectedRef.child(pathId).setValue(location.getId());
+                }
             }
         }
     }
@@ -354,6 +366,36 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                     currentUserId = id;
                     Log.i("mUserDatabase", "Email is: " + email);
                     mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+                    mUserLocations = mUserBranch.child("collectedLocations");
+                    mUserLocations.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            String location = dataSnapshot.getValue().toString();
+                            Log.i("mUserLocations", "Next location is: " + location);
+                            collectedLocationList.add(location);
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }
             }
 
@@ -378,4 +420,37 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             }
         });
     }
+
+    /*public void getCurrentUserData(){
+        mUserLocations = FirebaseDatabase.getInstance().getReference().child("Users").child("collectedLocations");
+        mUserLocations.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String location = dataSnapshot.getValue().toString();
+                Log.i("mUserLocations", "Next location is: " + location);
+                collectedLocationList.add(location);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    **/
 }
