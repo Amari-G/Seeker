@@ -104,6 +104,7 @@ public class QuestActivity extends AppCompatActivity {
                 //String value = dataSnapshot.getValue(String.class);
                 String name = dataSnapshot.child("name").getValue().toString();
                 mLocations.add(name);
+                Log.i("mLocations", "Next value is: " + name);
                 locationAdapter.notifyDataSetChanged();
                 //mTester.setText("Location: " + value);
             }
