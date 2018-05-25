@@ -112,7 +112,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             double latitude = mLocation.getLatitude();
             double longitude = mLocation.getLongitude();
 
-            //Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Location : \nLatitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
             Toast greeting = Toast.makeText(getApplicationContext(),
                     "Happy emerald hunting!", Toast.LENGTH_LONG);
             greeting.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,
@@ -330,7 +330,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 numberCollected++;
                 SharedPreferences.Editor locationEditor = sharedPreferencesLocation.edit();
                 locationEditor.putInt("Number Collected", numberCollected);
-                locationEditor.putString("Location" + numberCollected, location.getName());
+                locationEditor.putString("Location", location.getName());
                 locationEditor.commit();
                 Log.i("Location" + numberCollected, location.getName());
                 EmeraldCollector emeraldCollector = new EmeraldCollector();
