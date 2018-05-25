@@ -48,7 +48,7 @@ public class EmeraldCollector extends DialogFragment {
         Email = sharedPreferences.getString("Email", null);
         sharedPreferencesLocation = getActivity().getSharedPreferences("location_details", MODE_PRIVATE);
         numberCollected = sharedPreferences.getInt("Number Collected", 0);
-        Location = sharedPreferencesLocation.getString("Location" + numberCollected, null);
+        Location = sharedPreferencesLocation.getString("Location", null);
         Log.i("Location", "Value is: " + Location);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
