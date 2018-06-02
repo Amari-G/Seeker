@@ -202,11 +202,6 @@ public class QuestActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.quest_settings:
-                //go to settings page
-                Intent settings = new Intent(this, SettingsActivity.class);
-                this.startActivity(settings);
-                break;
             case R.id.quest_Sign_Out:
                 //go to welcome page
                 FirebaseAuth.getInstance().signOut();
@@ -222,11 +217,6 @@ public class QuestActivity extends AppCompatActivity {
                 //go to create quest
                 Intent addQuest = new Intent(this, CreateQuest.class);
                 this.startActivity(addQuest);
-                break;
-            case R.id.quest_saved_quests:
-                //go to create location
-                Intent SavedQuests = new Intent(this, SavedQuestsActivity.class);
-                this.startActivity(SavedQuests);
                 break;
             default:
                 return super.onOptionsItemSelected(item);

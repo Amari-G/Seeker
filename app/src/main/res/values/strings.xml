@@ -245,6 +245,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="active_quests">Active Quests</string>
+    <string name="tracked_locations">Tracked Locations</string>
 
 
 </resources>
