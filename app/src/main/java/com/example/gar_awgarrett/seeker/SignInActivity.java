@@ -6,10 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,6 +42,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         findViewById(R.id.tvSignUp).setOnClickListener(this);
         findViewById(R.id.bSISignIn).setOnClickListener(this);
+
+        //editTextEmail.setTextSize(TypedValue.COMPLEX_UNIT_DIP, getResources().getDimension(R.dimen.textSize));
 
         ImageButton bSIBack = findViewById(R.id.bSIBack);
         bSIBack.setOnClickListener(new View.OnClickListener() {

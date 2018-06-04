@@ -43,7 +43,7 @@
             android:scrollbarDefaultDelayBeforeFade="500"
             android:scrollbarFadeDuration="1000"
             android:scrollbarSize="8dp"
-            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarStyle="insideInset"
             android:scrollbarThumbVertical="@drawable/scrollbar_floating_activity"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="1dp" />
