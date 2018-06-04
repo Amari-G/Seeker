@@ -6,74 +6,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.gar_awgarrett.seeker.SignInActivity"
-    android:background="@color/green">
+    android:background="#FFFFFF">
+
 
     <ImageView
-        tools:ignore="ContentDescription"
-        android:id="@+id/white_background"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/white_background" />
-
-    <ImageView
-        tools:ignore="ContentDescription"
-        android:id="@+id/white_background2"
-        android:layout_width="5dp"
-        android:layout_height="5dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/white_background" />
-
-    <ImageView
-        tools:ignore="ContentDescription"
         android:id="@+id/seeker_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignBaseline="@+id/white_background"
-        android:src="@drawable/seekertextpng" />
-
-
-    <EditText
-        android:id="@+id/etSIEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/white_background2"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="@string/edit_text_email"
-        android:inputType="textEmailAddress" />
-
-    <EditText
-        android:id="@+id/etSIPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/white_background2"
-        android:layout_alignStart="@+id/etSIEmail"
-        android:ems="10"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:hint="@string/edit_text_password"
-        android:inputType="textPassword"
-        />
+        android:src="@drawable/seekerlogo"
+        tools:ignore="ContentDescription" />
+
+
+        <android.support.percent.PercentRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/seeker_text"
+            android:layout_above="@id/bSISignIn"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal">
+
+            <EditText
+                android:id="@+id/etSIEmail"
+                android:ems="10"
+                android:hint="@string/edit_text_email"
+                android:inputType="textEmailAddress"
+                android:textSize="18sp"
+                android:singleLine="true"
+                app:layout_heightPercent="40%"
+                app:layout_widthPercent="80%" />
+
+            <EditText
+                android:id="@+id/etSIPassword"
+                android:layout_below="@id/etSIEmail"
+                android:ems="10"
+                android:hint="@string/edit_text_password"
+                android:inputType="textPassword"
+                android:textSize="18sp"
+                android:singleLine="true"
+                app:layout_heightPercent="40%"
+                app:layout_widthPercent="80%" />
+        </android.support.percent.PercentRelativeLayout>
 
     <Button
         android:id="@+id/bSISignIn"
-        style="Widget.AppCompat.Button.Colored"
         android:layout_width="180dp"
         android:layout_height="75dp"
-        android:layout_below="@+id/white_background"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/button_main"
+        android:backgroundTint="@color/primaryLightColor"
         android:text="@string/button_name_sign_in"
-        android:textColor="@android:color/white"
+        android:textColor="@color/primaryDarkColorText"
         android:textSize="22sp"
-        />
+        style="Widget.AppCompat.Button.Colored" />
 
 
     <ImageButton
@@ -92,10 +82,10 @@
         android:id="@+id/tvSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bSISignIn"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
-        android:padding="15dp"
+        android:layout_marginBottom="10dp"
+        android:padding="10dp"
         android:text="@string/create_account"/>
 
     <ProgressBar

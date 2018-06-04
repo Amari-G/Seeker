@@ -5,15 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:backgroundTint="@color/colorPrimaryDark"
+    android:background="@color/surfaceDarkColor"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimary"
+        android:background="@color/primaryColor"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
@@ -24,8 +23,10 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/my_toolbar"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:layout_above="@+id/bottom_navigation_view"
         android:headerDividersEnabled="true" />
 
     <android.support.design.widget.BottomNavigationView
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="@color/translucent_grey"
+        android:background="@color/navigation_bar"
         app:itemIconTint="@android:color/black"
         app:menu="@menu/bottom_navigation_main" />
 
