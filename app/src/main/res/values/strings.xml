@@ -42,6 +42,7 @@
     <string name="create_location">Create a Location</string>
     <string name="location_proximity_warning">WARNING: New locations may not be within 0.1 miles of the user.</string>
     <string name="create">Create</string>
+    <string name="button_name_delete_account">Delete Account</string>
 
     <!--Strings for Content Creation-->
     <string name="edit_text_latitude">Latitude</string>
