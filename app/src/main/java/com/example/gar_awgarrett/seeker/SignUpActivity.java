@@ -47,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private FirebaseAuth mAuth;
     private DatabaseReference userRef;
     private DatabaseReference collectedRef;
+    private static final String TAG = "UserEmailSent";
 
     SharedPreferences sharedPreferences;
 
@@ -114,6 +115,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         progressBar.setVisibility(View.VISIBLE);
 
 
+
+
         //ArrayList<String> locations = new ArrayList<>();
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -133,6 +136,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                     //create a new child in the Users branch of the Firebase database
                     userRef.child(pathId).setValue(user);
+
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    FirebaseUser user2 = auth.getCurrentUser();
+
+                    user2.sendEmailVerification()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "Email sent.");
+                                    }
+                                }
+                            });
 
                     /*
                     collectedRef = FirebaseDatabase.getInstance().getReference().child("Users").child(pathId).child("collectedLocations");
@@ -186,6 +202,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     editor.putString("Name", name);
                     editor.putString("Email", email);
                     editor.commit();
+
 
 
                     finish();

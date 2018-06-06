@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,15 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,6 +51,8 @@ public class QuestActivity extends AppCompatActivity {
     //private TextView mTester;
     private ArrayList<String> mLocations = new ArrayList<>();
     private ArrayList<String> mQuests = new ArrayList<>();
+    private static final String TAG = "UserAccountDeleted";
+    FragmentManager fm = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +223,11 @@ public class QuestActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent signOut = new Intent(this, WelcomeActivity.class);
                 this.startActivity(signOut);
+                break;
+            case R.id.quest_delete_account:
+                //prompts user on whether or not they want to delete their account; leads to dialogfragment
+                DeleteAccountWarning warning = new DeleteAccountWarning();
+                warning.show(fm, "Delete Account");
                 break;
             case R.id.action_add_location:
                 //go to create location
