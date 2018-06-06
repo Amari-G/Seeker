@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/bNBCamera"
+        android:id="@+id/bNBHelp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:contentDescription="@string/button_camera_page_description"
-        android:icon="@android:drawable/ic_menu_camera" />
+        android:icon="@android:drawable/ic_menu_help"
+        android:title="Help" />
 
     <item
         android:id="@+id/bNBMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/bNBCamera"
+        android:layout_alignTop="@+id/bNBHelp"
         android:layout_centerHorizontal="true"
         android:contentDescription="@string/button_map_page_description"
-        android:icon="@android:drawable/ic_dialog_map" />
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="Map" />
 
     <item
         android:id="@+id/bNBQuests"
@@ -27,5 +29,6 @@
         android:layout_alignTop="@+id/bNBMap"
         android:layout_marginEnd="20dp"
         android:contentDescription="@string/button_quest_page_description"
-        android:icon="@android:drawable/ic_menu_sort_by_size" />
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="Quests" />
 </menu>
