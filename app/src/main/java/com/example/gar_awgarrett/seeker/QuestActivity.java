@@ -79,7 +79,7 @@ public class QuestActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.bNBCamera:
+                    case R.id.bNBHelp:
                         Intent cam = new Intent(getApplicationContext(), MapPage.class);
                         startActivity(cam);
                         break;

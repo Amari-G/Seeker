@@ -165,7 +165,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.bNBCamera:
+                    case R.id.bNBHelp:
                         //startActivity(new Intent(MapPage.this, QuestActivity.class));
                         //EmeraldCollector emeraldCollector = new EmeraldCollector();
                         //emeraldCollector.show(fm, "Emerald Collector");
