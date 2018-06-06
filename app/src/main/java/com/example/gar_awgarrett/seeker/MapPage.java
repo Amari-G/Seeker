@@ -42,13 +42,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class MapPage extends FragmentActivity implements OnMapReadyCallback {
 
@@ -57,25 +56,30 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     private Location mLocation;
     double latitude, longitude;
     FragmentManager fm = getSupportFragmentManager();
-    int collectedCounter = 0;
     public TextView mInputDisplay;
     public String mInput;
     private String Name;
     private String Email;
     public String currentUserId;
+    private int numberCollected = 0;
 
     SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferencesLocation;
 
     private DatabaseReference mDatabase;
     private ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations = new ArrayList<>();
-    private ArrayList<String> locationList = new ArrayList<>();
+    private ArrayList<String> collectedLocationNameList = new ArrayList<>();
+    private ArrayList<String> collectedLocationList = new ArrayList<>();
 
     private DatabaseReference mUserDatabase;
     private DatabaseReference mUserBranch;
     private DatabaseReference collectedRef;
+    private DatabaseReference collectedNameRef;
+    private DatabaseReference mUserLocations;
 
     private boolean inProximity = false;
     private com.example.gar_awgarrett.seeker.Location proximityLocation;
+    int collectedCounter = collectedLocationList.size();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +100,8 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         Email = sharedPreferences.getString("Email", null);
         getCurrentUserBranch();
 
+        sharedPreferencesLocation = getSharedPreferences("location_details", MODE_PRIVATE);
+
         gpsTracker = new GPSTracker(getApplicationContext());
         mLocation = gpsTracker.getLocation();
 
@@ -106,7 +112,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
             double latitude = mLocation.getLatitude();
             double longitude = mLocation.getLongitude();
 
-            //Toast.makeText(getApplicationContext(), "Your Location : \nLattitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Your Location : \nLatitude " + latitude + "\nLongitude " + longitude, Toast.LENGTH_LONG).show();
             Toast greeting = Toast.makeText(getApplicationContext(),
                     "Happy emerald hunting!", Toast.LENGTH_LONG);
             greeting.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL,
@@ -132,7 +138,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         chestButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(MapPage.this, QuestActivity.class));
                 ChestCollectionList collectionList = new ChestCollectionList();
                 collectionList.show(fm, "Collection List");
             }
@@ -162,9 +167,10 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 switch (item.getItemId()) {
                     case R.id.bNBCamera:
                         //startActivity(new Intent(MapPage.this, QuestActivity.class));
-                        EmeraldCollector emeraldCollector = new EmeraldCollector();
-                        emeraldCollector.show(fm, "Emerald Collector");
-                        collectedCounter++;
+                        //EmeraldCollector emeraldCollector = new EmeraldCollector();
+                        //emeraldCollector.show(fm, "Emerald Collector");
+                        //collectedCounter = collectedLocationList.size();
+                        //collectedCounter++;
                         TextView textView = (TextView) findViewById(R.id.textView);
                         textView.setText(" x " + collectedCounter);
                         Log.i("collectedCounter", "Size is " + collectedCounter);
@@ -247,7 +253,7 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                 Double latitude = Double.parseDouble(dataSnapshot.child("latitude").getValue().toString());
                 Double longitude = Double.parseDouble(dataSnapshot.child("longitude").getValue().toString());
                 com.example.gar_awgarrett.seeker.Location newLocation = new com.example.gar_awgarrett.seeker.Location(id, name, latitude, longitude);
-                mLocations.add(newLocation);
+                //mLocations.add(newLocation);
                 displayLocation(mMap, newLocation);
                 //next two lines keeps track of mLocations size for testing
                 int size = mLocations.size();
@@ -306,34 +312,53 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
         String distanceToMarker = String.valueOf(MapPage.distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0)) + " mi";
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngLocation));
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngLocation, 11.5f));
-        mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker) .icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
-        checkInProximity(mLocations, latitude, longitude);
-        if (inProximity){
-            EmeraldCollector emeraldCollector = new EmeraldCollector();
-            emeraldCollector.show(fm, "Emerald Collector");
-            collectedCounter++;
-            TextView textView = (TextView) findViewById(R.id.textView);
-            textView.setText(" x " + collectedCounter);
-            Log.i("collectedCounter", "Size is: " + collectedCounter);
-            Log.i("inProximity", "Proximity location is: " + location.getName());
-            if (mUserBranch != null) {
-                collectedRef = mUserBranch.child("collectedLocations");
-                DatabaseReference newCollectedLocationPath = mUserBranch.push();
-                final String pathId = newCollectedLocationPath.getKey();
-                collectedRef.child(pathId).setValue(location.getId());
+        String id = location.getId();
+        Log.i("location", "Id is: " + id);
+        boolean collected = false;
+        for (String loc : collectedLocationList){
+            if (loc.equals(id)){
+                collected = true;
+                Log.i("collectedLocation", "Id is: " + id);
+            }
+        }
+        if (collected == false) {
+            mLocations.add(location);
+            mMap.addMarker(new MarkerOptions().position(latLngLocation).title(location.getName()).snippet(distanceToMarker).icon(BitmapDescriptorFactory.fromResource(R.drawable.emerald_resized_1)));
+            inProximity = false;
+            checkInProximity(location, latitude, longitude);
+            if (inProximity) {
+                numberCollected++;
+                SharedPreferences.Editor locationEditor = sharedPreferencesLocation.edit();
+                locationEditor.putInt("Number Collected", numberCollected);
+                locationEditor.putString("Location", location.getName());
+                locationEditor.commit();
+                Log.i("Location" + numberCollected, location.getName());
+                EmeraldCollector emeraldCollector = new EmeraldCollector();
+                emeraldCollector.show(fm, "Emerald Collector");
+                collectedCounter = collectedLocationList.size();
+                //collectedCounter++;
+                TextView textView = (TextView) findViewById(R.id.textView);
+                textView.setText(" x " + collectedCounter);
+                //proximityLocationList.add(location);
+                Log.i("collectedCounter", "Size is: " + collectedCounter);
+                Log.i("inProximity", "Proximity location is: " + location.getName());
+                if (mUserBranch != null) {
+                    collectedRef = mUserBranch.child("collectedLocations");
+                    collectedRef.child(location.getId()).setValue(location.getName());
+                }
             }
         }
     }
 
-    public com.example.gar_awgarrett.seeker.Location checkInProximity(ArrayList<com.example.gar_awgarrett.seeker.Location> mLocations, double latitude, double longitude){
+    public com.example.gar_awgarrett.seeker.Location checkInProximity(com.example.gar_awgarrett.seeker.Location location, double latitude, double longitude){
 
-        for(int i = 0; i <= mLocations.size() - 1; i++){
-            if (mLocations.get(i).getLatitude().intValue() != 0  && mLocations.get(i).getLongitude().intValue() != 0){
-                double distance = distance(latitude, mLocations.get(i).getLatitude(), longitude, mLocations.get(i).getLongitude(), 0.0, 0.0);
-                if(distance <= 0.1){
-                    inProximity = true;
-                    proximityLocation = mLocations.get(i);
-                }
+
+        if (location.getLatitude().intValue() != 0  && location.getLongitude().intValue() != 0){
+            double distance = distance(latitude, location.getLatitude(), longitude, location.getLongitude(), 0.0, 0.0);
+            if(distance <= 0.1){
+                Log.i("distance is: ", distance + " mi");
+                inProximity = true;
+                proximityLocation = location;
             }
         }
         return proximityLocation;
@@ -343,7 +368,6 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
     //this method matches mUserBranch to the current user branch in the database, based on the email passed from SignUpActivity
     public void getCurrentUserBranch(){
         mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
-        //mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child("-LBMRM19FzNYwDVpzh6B");
         mUserDatabase.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -354,6 +378,48 @@ public class MapPage extends FragmentActivity implements OnMapReadyCallback {
                     currentUserId = id;
                     Log.i("mUserDatabase", "Email is: " + email);
                     mUserBranch = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+                    mUserLocations = mUserBranch.child("collectedLocations");
+                    mUserLocations.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                            String location = dataSnapshot.getKey().toString();
+                            String locationName = dataSnapshot.getValue().toString();
+                            Log.i("mUserLocations", "Next location is: " + location);
+                            collectedLocationList.add(location);
+                            collectedLocationNameList.add(locationName);
+                            collectedCounter = collectedLocationList.size();
+                            TextView textView = (TextView) findViewById(R.id.textView);
+                            textView.setText(" x " + collectedCounter);
+                            Log.i("collectedCounter", "Size is: " + collectedCounter);
+                            SharedPreferences.Editor locationEditor = sharedPreferencesLocation.edit();
+                            locationEditor.putInt("Counter", collectedCounter);
+                            Set<String> set = new HashSet<String>();
+                            set.addAll(collectedLocationNameList);
+                            locationEditor.putStringSet("locations", set);
+                            locationEditor.commit();
+                        }
+
+                        @Override
+                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
                 }
             }
 

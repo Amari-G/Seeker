@@ -12,21 +12,17 @@
         android:icon="@drawable/ic_add_location_black_24dp"
         android:title="@string/button_name_create_location"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_black_24dp"
-        android:title="@string/button_name_search"
-        app:showAsAction="always" />
-    <item
+<!--    <item
         android:id="@+id/quest_settings"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/button_name_settings"
-        app:showAsAction="never" />
+        app:showAsAction="never" />-->
     <item
         android:id="@+id/quest_Sign_Out"
         android:icon="@drawable/ic_sign_out_black_24dp"
         android:title="@string/button_name_sign_out"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/quest_delete_account"
         android:icon="@drawable/ic_sign_out_black_24dp"
@@ -39,4 +35,6 @@
         app:showAsAction="never" />
 
     <!-- Settings, should always be in the overflow -->
+
+
 </menu>
